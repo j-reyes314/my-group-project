@@ -1,0 +1,17 @@
+.interface{
+    margin-top: 60px;
+}
+
+box{
+    float: left;
+}
+.see-all{
+    float: left;
+}
+ButtonGroup{
+    float: right;
+}
+
+.students{
+    margin-top: 2em;
+}
