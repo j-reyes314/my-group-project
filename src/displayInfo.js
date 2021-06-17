@@ -5,20 +5,21 @@ import {Link} from 'react-router-dom'
 function DisplayInfo(props){
 
     return(
-        <Link>
-            <div>
-            
         
-            <h1>Name</h1>
+            <div>
+                    
+                <Link>
+                    <h1>Name</h1>
 
-            <h2>Email</h2>
-            <h3>GPA</h3>
+                    <h2>Email</h2>
+                    <h3>GPA</h3>
 
+                </Link>
 
-            <Button><DeleteIcon/></Button>
+                <Button><DeleteIcon/></Button>
 
             </div>
-        </Link>
+     
     )
 }
 
