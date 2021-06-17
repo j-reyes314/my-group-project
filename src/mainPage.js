@@ -30,12 +30,13 @@ function MainPage(){
                <Grid>
 
                     <Card boxShadow ={10} className='see-all'>
+                      <Link  to='/Campus'>
                         <ButtonBase>
-                            <Router>
+                          
                                 <CardContent>See All Campuses </CardContent>
-                            </Router>
+                            
                         </ButtonBase>
-                        
+                        </Link>
                     </Card>
                 </Grid>
 
