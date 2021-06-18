@@ -3,6 +3,7 @@ import Add from './addCampus'
 import DisplayInfo from'./displayInfo';
 
 function Campus (){
+    
     return(
         <div className='interface'>
 
