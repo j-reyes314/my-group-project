@@ -25,6 +25,7 @@ class Campus extends React.Component{
         super(props);
         this.state = {
             name: "",
+            studentArray: []
         }
 
 
@@ -32,30 +33,39 @@ class Campus extends React.Component{
 
     componentDidMount(){
         // query get student info here and setState
-        console.log("setting state");
+        // console.log("setting state");
         // this.setState({
         //     name: "hello"
         // })
         const fetchData = async() => {
-            console.log("w.e");
+            // console.log("w.e");
             const result = await
         axios.get("http://localhost:3002/Students").then(response => {
+        let studentArrayNames = [];
+        for(let i = 0; i < response.data.length ; i++){
+            studentArrayNames[i] = (response.data[i].firstname + " " + response.data[i].lastname);
+        }
+        this.setState({
+            studentArray: studentArrayNames
+        })
+        // this.setState({studentArray: response.data.data})
+        
+        console.log(studentArrayNames);
         console.log(response.data);
-        //   this.setState({name: response.data})
+        console.log(response.data[0]);
+        console.log(response.data[0].firstname);
         })
         .catch(error => {
           console.log(error);
         });
-        console.log(fetchData);
-        console.log("after await")
+        // console.log(fetchData);
+        // console.log("after await")
      }
      fetchData();
     }
     
     render(){ 
         return( 
-            
-            
             <div className='interface'>
             <h1>Students</h1>
             
@@ -64,7 +74,7 @@ class Campus extends React.Component{
                     <Grid container item>
                     <Grid container spacing={1}>
                         <Grid container item xs={12} spacing={3}>
-                        <FormRow name = {this.state.name} />
+                        <FormRow name = {this.state.studentArray[0]} />
                         </Grid>
                         <Grid container item xs={12} spacing={3}>
                         <FormRow name = {this.state.name} />
