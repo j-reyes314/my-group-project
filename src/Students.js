@@ -32,18 +32,24 @@ class Campus extends React.Component{
 
     componentDidMount(){
         // query get student info here and setState
-
-        this.setState({
-            name: "hello"
-        })
-
-        // axios.get("/Students").then(response => {
-        //   console.log(response.data);
-        //   this.setState({name: response.data.data})
+        console.log("setting state");
+        // this.setState({
+        //     name: "hello"
         // })
-        // .catch(error => {
-        //   console.log(error);
-        // });
+        const fetchData = async() => {
+            console.log("w.e");
+            const result = await
+        axios.get("http://localhost:3002/Students").then(response => {
+        console.log(response.data);
+        //   this.setState({name: response.data})
+        })
+        .catch(error => {
+          console.log(error);
+        });
+        console.log(fetchData);
+        console.log("after await")
+     }
+     fetchData();
     }
     
     render(){ 

@@ -26,6 +26,13 @@ const DisplayInfo = (props) => {
   
   useEffect(() => {
     setName(props.name);
+    //     axios.get("http://localhost:3002/Students").then(response => {
+    //       console.log(response.data);
+    //     //   this.setState({name: response.data})
+    //     })
+    //     .catch(error => {
+    //       console.log(error);
+    //     });
   });
 
 

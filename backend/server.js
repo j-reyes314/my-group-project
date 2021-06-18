@@ -1,25 +1,63 @@
 let express = require('express');
 let {Sequelize} = require('sequelize');
+const cors = require('cors');
+
 
 let app = express();
 
-var sequelize = new Sequelize('postgres://postgres:Pg3600@localhost:3001/studentcampus');
 
+app.use(cors());
 
-try{
-    sequelize.authenticate().then(console.log("The connection has been established."))
-}catch(er){
-    console.log("Some error", er);
-}
-
-
-app.use(express.urlencoded({extended:true}));
+// app.use(express.urlencoded({extended:true}));
 
 app.use(express.json()); 
 
-// app.get('/Students', (req, res) => {
-//     Student.findAll().then(students => res.json(students))
-// })
+
+let server = app.listen(0, () => {
+    console.log('Listening', server.address().port)
+  })
+
+var sequelize = new Sequelize('postgres://postgres:Pg3600@localhost:3001/studentcampus');
+
+let Student = sequelize.define('Student',{
+    firstname: Sequelize.STRING,
+    lastname: Sequelize.STRING,
+    email: Sequelize.STRING,
+    school: Sequelize.STRING,
+    gpa: Sequelize.FLOAT
+});
+
+
+// try{
+//     sequelize.authenticate().then(console.log("The connection has been established."))
+// }catch(er){
+//     console.log("Some error", er);
+// }
+
+
+app.get('/Students', async function(request, response) {
+    // dStuent.findAll().then(students => res.json(students))
+
+ 
+    let test =  await Student.findAll();
+
+    console.log(test);
+    //Student.findAll().then(function(rows) {
+
+     //   console.log(row);
+
+
+       // for(var i = 0; i < rows.length; i++) {
+       // var columnData = rows[i].dataValues;
+        //var name = columnData.firstname + " " + columnData.lastname;
+    //console.log(columnData );
+    //someData.append(columnData);
+        //}
+        //console.log(someData);  
+    //});
+    
+    response.json(test);
+})
 
 app.post('/Students', function(request, response){
 
@@ -35,25 +73,17 @@ app.post('/Students', function(request, response){
     //console.log(request);
     console.log("We are getting information from the front end");
 
-    let Student = sequelize.define('Student',{
-        firstname: Sequelize.STRING,
-        lastname: Sequelize.STRING,
-        email: Sequelize.STRING,
-        school: Sequelize.STRING,
-        gpa: Sequelize.FLOAT
-    });
+    // let Student = sequelize.define('Student',{
+    //     firstname: Sequelize.STRING,
+    //     lastname: Sequelize.STRING,
+    //     email: Sequelize.STRING,
+    //     school: Sequelize.STRING,
+    //     gpa: Sequelize.FLOAT
+    // });
 
     Student.sync().then(function(){
         console.log("The table is ready to be used");
     })
-
-    Student.findAll().then(function(rows) {
-        for(var i = 0; i < rows.length; i++) {
-        var columnData = rows[i].dataValues;
-        var name = columnData.firstname + " " + columnData.lastname;
-        console.log(name);
-        }
-    });
 
 
     Student.findOne({
