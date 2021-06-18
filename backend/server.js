@@ -15,7 +15,11 @@ try{
 
 app.use(express.urlencoded({extended:true}));
 
-app.use(express.json());
+app.use(express.json()); 
+
+// app.get('/Students', (req, res) => {
+//     Student.findAll().then(students => res.json(students))
+// })
 
 app.post('/Students', function(request, response){
 
@@ -31,8 +35,6 @@ app.post('/Students', function(request, response){
     //console.log(request);
     console.log("We are getting information from the front end");
 
-
-
     let Student = sequelize.define('Student',{
         firstname: Sequelize.STRING,
         lastname: Sequelize.STRING,
@@ -44,6 +46,14 @@ app.post('/Students', function(request, response){
     Student.sync().then(function(){
         console.log("The table is ready to be used");
     })
+
+    Student.findAll().then(function(rows) {
+        for(var i = 0; i < rows.length; i++) {
+        var columnData = rows[i].dataValues;
+        var name = columnData.firstname + " " + columnData.lastname;
+        console.log(name);
+        }
+    });
 
 
     Student.findOne({
@@ -70,6 +80,7 @@ app.post('/Students', function(request, response){
     });
 
     response.send("The form has been received");
+    
 
 });
 

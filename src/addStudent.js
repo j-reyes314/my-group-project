@@ -52,6 +52,7 @@ class AddStudent extends React.Component{
             console.log(content);
           })();
     }
+    
 
     render(){ 
         return(

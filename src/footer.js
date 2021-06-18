@@ -47,6 +47,8 @@ function Footer(props){
         return  (
             <div >
                 
+                <Button type="button" onClick={handleOpen}>Add Student</Button>
+
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -55,34 +57,35 @@ function Footer(props){
                     >
 
                     <div style={modalStyle} className={classes.paper}>
-                        <AddStudent/>
+                        <AddStudent close ={()=>handleClose}/>
                     </div>
                     
                 </Modal>
                 
-                <button type="button" onClick={handleOpen}>
-                Add Student
-                </button>
+             
             </div>
         )
     }else{
 
-        return  <div>
-        <button type="button" onClick={handleOpen}>
-          Add Campus
-        </button>
-        <Modal 
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
-            
-            <div style ={modalStyle} className={classes.paper}>
-                    <AddCampus/>
-             </div>
-        </Modal>
-      </div>
+        return( 
+            <div>
+                <Button type="button" onClick={handleOpen}>Add Campus</Button>
+
+                <Modal 
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    >
+                    
+                    <div style ={modalStyle} className={classes.paper}>
+                        <AddCampus/>
+                    </div>
+
+                </Modal>
+
+            </div>
+        )
     }
     
 }
