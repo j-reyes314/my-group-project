@@ -61,7 +61,7 @@ function MainPage(){
           <div className='interface'>
   
             <Grid container spacing={2}>
-              <Grid item xs={3} style= {{height: ""}} direction="row"
+              <Grid item xs={4} style= {{height: ""}} direction="row"
         justify="center"
         alignItems="stretch" >
                 {/* <ButtonBase className={classes.image}>
@@ -99,20 +99,21 @@ function MainPage(){
           </Grid>
 {/* begin code */}
             <Grid container spacing={2}>
-            <Grid item>
-            <Card className='see-all'>
+              <Grid item xs={4} style= {{height: ""}} direction="row"
+        justify="center"
+        alignItems="stretch">
+                <Card className='see-all'>
 
-            <Link  to='/Students' style ={{textDecoration: 'none'}}>
-            <ButtonBase>
+                <Link  to='/Students' style ={{textDecoration: 'none'}}>
+                  <ButtonBase>
 
-              <CardContent>See All Student</CardContent>
-
-            </ButtonBase>
-            </Link>
-            </Card>
-            </Grid>
-            <Grid item xs={12} sm container>
-            <Grid container item>
+                  <Typography gutterBottom variant="h5" component="h2">See All Students</Typography>
+                  </ButtonBase>
+                </Link>
+                </Card>
+              </Grid>
+             <Grid item xs={12} sm container>
+              <Grid container item>
                 <Grid container spacing={1}>
                   <Grid container item xs={12} spacing={3}>
                     <FormRow name ='Student' />
