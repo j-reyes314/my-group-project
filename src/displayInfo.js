@@ -5,6 +5,7 @@ import { Card } from '@material-ui/core';
 import { CardActions } from '@material-ui/core';
 import { makeStyles, mergeClasses } from '@material-ui/styles';
 import { CardContent } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root:{
@@ -18,26 +19,28 @@ const useStyles = makeStyles({
 function DisplayInfo(props){
  const styles = useStyles();
 
+
+
     return(
         
             <div className= {styles.pos}>
-                <Card className ={styles.root}>
-                    
-                  <CardContent>
+              <Grid container spacing ={0}>
+             
+                  <Grid item>
+                  
 
                     <h1>{props.name}</h1>
 
-                  </CardContent>
+                
 
 
                     <Link style ={{textDecoration: 'none'}}><Button size ='small'>See More</Button></Link>
-
-                    <CardActions>
-
-                      <Button><DeleteIcon/></Button>
-
-                    </CardActions>
-                </Card> 
+                    </Grid>  
+                   
+                    <Grid item>
+                <Button><DeleteIcon/></Button>
+                </Grid>  
+                </Grid>
             </div>
      
     )

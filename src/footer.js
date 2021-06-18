@@ -45,7 +45,7 @@ function Footer(props){
     if(isStudent){
 
         return  (
-            <div >
+            <div  >
                 
                 <Button type="button" onClick={handleOpen}>Add Student</Button>
 
