@@ -4,9 +4,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Navigation from './navigation'
 
+import AddStudent from './addStudent';
+
 ReactDOM.render(
   <React.StrictMode>
     <Navigation/>
+    {/* <AddStudent/> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
