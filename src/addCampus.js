@@ -6,40 +6,51 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 function AddCampus(props){
 
-  return(
-  <form className ='insert' >
+    const onSubmit = (e) =>{
+        e.preventDefault();
+        console.log()
+        props.close();
+    }
 
-    <TextField
-        variant='filled'
-        color='secondary'
-        type='text'
-        label='firstName'
-        placeholder='First Name' />
-    <TextField
-        variant='filled'
-        color='secondary'
-        type='text'
-        label='lastName'
-        placeholder='Last Name' />
-    <TextField
-        variant='filled'
-        color='secondary'
-        type='email'
-        label='email'
-        placeholder='Email' />
-    <TextField
-        variant='filled'
-        color='secondary'
-        type='text'
-        label='School'
-        placeholder='University' />
-    <TextField
-        variant='filled'
-        color='secondary'
-        type='text'
-        label='gpa'
-        placeholder='GPA' />
-        
+  return(
+    <form className ='insert' onSubmit= {onSubmit} >
+
+        <TextField
+            variant='filled'
+            color='secondary'
+            name ='firstName'
+            type='text'
+            label='First Name'
+            placeholder='First Name' />
+        <TextField
+            variant='filled'
+            color='secondary'
+            name='lastName'
+            type='text'
+            label='Last Name'
+            placeholder='Last Name' />
+        <TextField
+            variant='filled'
+            color='secondary'
+            name='email'
+            type='email'
+            label='Email'
+            placeholder='Email' />
+        <TextField
+            variant='filled'
+            color='secondary'
+            name='university'
+            type='text'
+            label='University'
+            placeholder='University' />
+        <TextField
+            variant='filled'
+            color='secondary'
+            name='gpa'
+            type='text'
+            label='GPA'
+            placeholder='GPA' />
+            
         <Button><AddCircleIcon type ="submit"/></Button>
   </form>
   )

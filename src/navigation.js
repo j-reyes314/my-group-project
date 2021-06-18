@@ -26,8 +26,8 @@ function Navigation(){
             <Link to='/'><HomeIcon/></Link>
           </IconButton>
 
-          <Link to='/Campus'><Button>Campuses</Button></Link>
-          <Link to='/Students'><Button>Students</Button></Link>
+          <Link to='/Campus' style ={{textDecoration: 'none'}}><Button>Campuses</Button></Link>
+          <Link to='/Students' style ={{textDecoration: 'none'}}><Button>Students</Button></Link>
 
           
         </Toolbar>
