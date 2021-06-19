@@ -1,10 +1,7 @@
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Button } from '@material-ui/core'
+import { Button, Grid } from '@material-ui/core'
 import {Link} from 'react-router-dom'
-
 import { makeStyles } from '@material-ui/styles';
-
-import { Grid } from '@material-ui/core';
 import React, {useState, useEffect} from 'react';
 
 const useStyles = makeStyles({
@@ -16,26 +13,26 @@ const useStyles = makeStyles({
     }
 })
 
+// const defaultNames=()=>{[id: '',
+// firstname: 'hello',
+// lastname: "there",
+// school: 'world,']}
+const defaultnames =({
+  id: '',
+  firstname:'',
+  lastname:'',
+  school:'',
+})
+
 
 
 const DisplayInfo = (props) => {
   const styles = useStyles();
-  const [firstName, setfirstName] = useState(props.firstName);
-  const [lastName, setlastName] = useState(props.lastName);
-  const [campus, setCampus] = useState(props.campus);
+  const[studentInfo, setStudentInfo] = useState(defaultnames)
 
-  
-  // useEffect(() => {
-  //   setName(props.name);
-  //   //     axios.get("http://localhost:3002/Students").then(response => {
-  //   //       console.log(response.data);
-  //   //     //   this.setState({name: response.data})
-  //   //     })
-  //   //     .catch(error => {
-  //   //       console.log(error);
-  //   //     });
-  // });
-
+  useEffect(()=>{
+      
+  })
 
     return(
         
@@ -45,8 +42,8 @@ const DisplayInfo = (props) => {
                   <Grid item>
                   
 
-                    <h1>{firstName} {lastName}</h1>
-                    <h2>{campus}</h2>
+                    <h1>{studentInfo.firstname} {studentInfo.lastname}</h1>
+                    <h2>{studentInfo.school}</h2>
                 
 
 

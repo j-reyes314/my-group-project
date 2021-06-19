@@ -1,5 +1,4 @@
-import {Button} from '@material-ui/core'
-import { TextField } from '@material-ui/core';
+import {Button, TextField} from '@material-ui/core'
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 function AddCampus(props){

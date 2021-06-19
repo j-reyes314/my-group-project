@@ -33,38 +33,26 @@ class Campus extends React.Component{
     }
 
     componentDidMount(){
-        // query get student info here and setState
-        // console.log("setting state");
-        // this.setState({
-        //     name: "hello"
-        // })
+
         const fetchData = async() => {
             // console.log("w.e");
             const result = await
         axios.get("http://localhost:3002/Students").then(response => {
         let studentArrayNames = [];
         for(let i = 0; i < response.data.length ; i++){
-            studentArrayNames[i] = {
-                id: response.data[i].id,
-                firstName: response.data[i].firstname ,
-                lastName: response.data[i].lastname,
-                campus:response.data[i].school};
+            studentArrayNames[i] = response.data[i];
+            console.log(studentArrayNames[i].firstname);
         }
+      
         this.setState({
             studentArray: studentArrayNames
         })
-        // this.setState({studentArray: response.data.data})
-        
-        console.log(studentArrayNames);
-        console.log(response.data);
-        console.log(response.data[0]);
-        console.log(response.data[0].firstname);
+  
         })
         .catch(error => {
           console.log(error);
         });
-        // console.log(fetchData);
-        // console.log("after await")
+     
      }
      fetchData();
     }
@@ -72,8 +60,8 @@ class Campus extends React.Component{
     render(){ 
 
         let arr =[];
-        arr = this.state.studentArray.map(element => <DisplayInfo key={element.id} 
-                                                    firstName ={element.firstName} lastName ={element.lastName} campus ={element.campus}/>);
+        {this.state.studentArray != '' ? arr = this.state.studentArray.map(element => <DisplayInfo key={element.id} data={element}/>):
+        arr = <h1 styles ={{fontSize: '20pt'}}>There are no Campuses registered in database</h1>};
 
         return( 
             <div className='interface'>

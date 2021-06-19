@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
 
 
 class AddStudent extends React.Component{
@@ -105,9 +105,8 @@ class AddStudent extends React.Component{
                     max='4'
                     label='gpa'
                     placeholder='GPA' />
-                <input type="submit" />
+                    <Button variant='contained' type="submit">Submit</Button>
                     
-                {/* <Button><AddCircleIcon type ="submit"/></Button> */}
 
             </form>
         )
