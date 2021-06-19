@@ -50,13 +50,32 @@ class Students extends React.Component{
     .catch(error => {
       console.log(error);
     });
- 
+    
  }
 
     componentDidMount(){
 
-        
-     this.fetchData();
+        const fetchData = async() => {
+            // console.log("w.e");
+            const result = await
+        axios.get("http://localhost:3002/Students").then(response => {
+        let studentArrayNames = [];
+        for(let i = 0; i < response.data.length ; i++){
+            studentArrayNames[i] = response.data[i];
+            console.log(studentArrayNames[i].firstname);
+        }
+      
+        this.setState({
+            studentArray: studentArrayNames
+        })
+    
+        })
+        .catch(error => {
+          console.log(error);
+        });
+     
+     }
+     fetchData();
     }
     
     render(){ 
@@ -64,6 +83,8 @@ class Students extends React.Component{
         let arr =[];
         {this.state.studentArray != '' ? arr = this.state.studentArray.map(element => <DisplayInfo key={element.id} data={element}/>):
         arr = <h1 styles ={{fontSize: '20pt'}}>There are no Students registered in database</h1>};
+        // arr = this.state.studentArray.map(element => <DisplayInfo key={element.id} data={element}/>);
+
 
         return( 
             <div className='interface'>

@@ -1,5 +1,5 @@
 import Footer from'./footer';
-import DisplayInfo from './displayInfo';
+import DisplayCampus from './displayCampus';
 import { Grid } from '@material-ui/core';
 import React from 'react';
 import axios from 'axios';
@@ -28,17 +28,19 @@ class Campus extends React.Component{
         axios.get("http://localhost:3002/Campus").then(response => {
         let campusArrayNames = [];
         for(let i = 0; i < response.data.length ; i++){
-            campusArrayNames[i] = (response.data[i].campusname + " " + response.data[i].address);
+          //  campusArrayNames[i] = (response.data[i].campusname + " " + response.data[i].address);
+            campusArrayNames[i] = response.data[i];
+            //console.log(studentArrayNames[i].firstname);
         }
         this.setState({
             campusArray: campusArrayNames
         })
         // this.setState({studentArray: response.data.data})
         
-        console.log(campusArrayNames);
-        console.log(response.data);
-        console.log(response.data[0]);
-        console.log(response.data[0].campusname);
+        // console.log(campusArrayNames);
+        // console.log(response.data);
+        // console.log(response.data[0]);
+        // console.log(response.data[0].campusname);
         })
         .catch(error => {
           console.log(error);
@@ -52,14 +54,19 @@ class Campus extends React.Component{
     render(){ 
 
         let arr =[];
-        {this.state.studentArray != '' ? arr = this.state.studentArray.map(element => <DisplayInfo key={element.id} data={element}/>):
+        {this.state.campusArray != '' ? arr = this.state.campusArray.map(element => <DisplayCampus key={element.id} data={element}/>):
         arr = <h1 styles ={{fontSize: '20pt'}}>There are no Campuses registered in database</h1>};
     
         return( 
             <div className='interface'>
-            <h1>Campuses</h1>
+
+                <div>
+                    <h1>Campuses</h1>
+                    <Footer close={()=>this.fetchData()} isStudent ={false}/>
+                </div>
+                {arr}
             
-            <Grid container spacing={2}>
+            {/* <Grid container spacing={2}>
             <Grid item xs={12} sm container>
                     <Grid container item>
                     <Grid container spacing={1}>
@@ -72,9 +79,9 @@ class Campus extends React.Component{
                     </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid> */}
 
-            <footer><Footer isStudent ={false}/></footer>
+            
             </div>
         )
     }

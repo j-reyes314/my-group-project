@@ -2,8 +2,7 @@ import React from 'react';
 import {Button} from '@material-ui/core'
 import FormGroup from '@material-ui/core/FormGroup';
 import { TextField } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+
 
 class AddCampus extends React.Component{
     constructor(props){

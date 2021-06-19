@@ -82,10 +82,10 @@ function MainPage(){
                 <Grid container item>
                   <Grid container spacing={1}>
                     <Grid container item xs={12} spacing={3}>
-                      <FormRow name = 'Campus' />
+                      {/* <FormRow name = 'Campus' /> */}
                     </Grid>
                     <Grid container item xs={12} spacing={3}>
-                      <FormRow name = 'Campus' />
+                      {/* <FormRow name = 'Campus' /> */}
                     </Grid>
                   </Grid>
                 </Grid>
@@ -108,10 +108,10 @@ function MainPage(){
               <Grid container item>
                 <Grid container spacing={1}>
                   <Grid container item xs={12} spacing={3}>
-                    <FormRow name ='Student' />
+                    {/* <FormRow name ='Student' /> */}
                   </Grid>
                   <Grid container item xs={12} spacing={3}>
-                    <FormRow name ='Student' />
+                    {/* <FormRow name ='Student' /> */}
                   </Grid>
                 </Grid>
               </Grid>
