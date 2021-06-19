@@ -10,8 +10,8 @@ class AddCampus extends React.Component{
         super(props);
 
         this.state = {
-            campusname: "",
-            imageurl: "",
+            campusName: "",
+            imageURL: "",
             address: "",
             description: "",
         }
@@ -34,7 +34,7 @@ class AddCampus extends React.Component{
         
     
         let values = this.state;
-        alert("We submitted a form with this data " + values.campusname);
+        alert("We submitted a form with this data " + values.campusName);
 
         (async () => {
             const rawResponse = await fetch('/Campus', {
@@ -59,19 +59,19 @@ class AddCampus extends React.Component{
                     variant='filled'
                     color='secondary'
                     type='text'
-                    value= {this.state.campusname}
+                    value= {this.state.campusName}
                     onChange= {this.handleFormChanges}
-                    name ='campusname'
+                    name ='campusName'
                     label='campusname'
                     placeholder='Campus' />
                 <TextField
                     variant='filled'
                     color='secondary'
                     type='text'
-                    value= {this.state.imageurl}
+                    value= {this.state.imageURL}
                     onChange= {this.handleFormChanges}
-                    name ='imageurl'
-                    label='imageurl'
+                    name ='imageURL'
+                    label='imageURL'
                     placeholder='Insert Image URL' />
                 <TextField
                     variant='filled'
@@ -94,7 +94,7 @@ class AddCampus extends React.Component{
                 <input type="submit" />
 
                 {/* <Button><AddCircleIcon type ="submit"/></Button> */}
-             
+                {/* change url type */}
              </form>
         )
     }

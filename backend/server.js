@@ -94,8 +94,8 @@ app.post('/Students', function(request, response){
 
     console.log(request.body);
 
-    let firstname = request.body.firstname;
-    let lastname = request.body.lastname;
+    let firstName = request.body.firstName;
+    let lastName = request.body.lastName;
     let email = request.body.email;
     let school= request.body.school;
     let gpa = request.body.gpa;
@@ -126,8 +126,8 @@ app.post('/Students', function(request, response){
             console.log("false");
 
             Student.create({
-                firstname: firstname,
-                lastname: lastname,
+                firstname: firstName,
+                lastname: lastName,
                 email: email,
                 school: school,
                 gpa: gpa
@@ -149,8 +149,8 @@ app.post('/Campus', function(request, response){
 
     console.log(request.body);
 
-    let campusname = request.body.campusname;
-    let imageurl = request.body.imageurl;
+    let campusName = request.body.campusName;
+    let imageURL = request.body.imageURL;
     let address = request.body.address;
     let description= request.body.description;
 
@@ -180,8 +180,8 @@ app.post('/Campus', function(request, response){
             console.log("false");
 
             Campus.create({
-                campusname: campusname,
-                imageurl: imageurl,
+                campusname: campusName,
+                imageurl: imageURL,
                 address: address,
                 description: description,
             });
