@@ -20,19 +20,21 @@ const useStyles = makeStyles({
 
 const DisplayInfo = (props) => {
   const styles = useStyles();
-  const [name, setName] = useState("");
+  const [firstName, setfirstName] = useState(props.firstName);
+  const [lastName, setlastName] = useState(props.lastName);
+  const [campus, setCampus] = useState(props.campus);
 
   
-  useEffect(() => {
-    setName(props.name);
-    //     axios.get("http://localhost:3002/Students").then(response => {
-    //       console.log(response.data);
-    //     //   this.setState({name: response.data})
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
-  });
+  // useEffect(() => {
+  //   setName(props.name);
+  //   //     axios.get("http://localhost:3002/Students").then(response => {
+  //   //       console.log(response.data);
+  //   //     //   this.setState({name: response.data})
+  //   //     })
+  //   //     .catch(error => {
+  //   //       console.log(error);
+  //   //     });
+  // });
 
 
     return(
@@ -43,12 +45,8 @@ const DisplayInfo = (props) => {
                   <Grid item>
                   
 
-                    <h1>{name}</h1>
-                    <ul>
-                      <li></li>
-                      <li></li>
-
-                    </ul>
+                    <h1>{firstName} {lastName}</h1>
+                    <h2>{campus}</h2>
                 
 
 

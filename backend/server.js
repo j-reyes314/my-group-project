@@ -1,12 +1,12 @@
 let express = require('express');
 let {Sequelize} = require('sequelize');
-// const cors = require('cors');
+const cors = require('cors');
 
 
 let app = express();
 
 
-// app.use(cors());
+app.use(cors());
 
 // app.use(express.urlencoded({extended:true}));
 

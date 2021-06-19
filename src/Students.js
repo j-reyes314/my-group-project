@@ -26,6 +26,7 @@ class Campus extends React.Component{
         this.state = {
             name: "",
             studentArray: []
+
         }
 
 
@@ -43,7 +44,11 @@ class Campus extends React.Component{
         axios.get("http://localhost:3002/Students").then(response => {
         let studentArrayNames = [];
         for(let i = 0; i < response.data.length ; i++){
-            studentArrayNames[i] = (response.data[i].firstname + " " + response.data[i].lastname);
+            studentArrayNames[i] = {
+                id: response.data[i].id,
+                firstName: response.data[i].firstname ,
+                lastName: response.data[i].lastname,
+                campus:response.data[i].school};
         }
         this.setState({
             studentArray: studentArrayNames
@@ -65,11 +70,16 @@ class Campus extends React.Component{
     }
     
     render(){ 
+
+        let arr =[];
+        arr = this.state.studentArray.map(element => <DisplayInfo key={element.id} 
+                                                    firstName ={element.firstName} lastName ={element.lastName} campus ={element.campus}/>);
+
         return( 
             <div className='interface'>
             <h1>Students</h1>
             
-            <Grid container spacing={2}>
+            {/* <Grid container spacing={2}>
             <Grid item xs={12} sm container>
                     <Grid container item>
                     <Grid container spacing={1}>
@@ -82,7 +92,8 @@ class Campus extends React.Component{
                     </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid> */}
+            {arr}
 
             <footer><Footer isStudent ={true}/></footer>
             </div>

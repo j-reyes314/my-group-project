@@ -27,7 +27,7 @@ class AddStudent extends React.Component{
 
     formSubmitHandler = (event) => {
         event.preventDefault();
-    
+
         console.log("Testing the state");
         console.log(this.state);
         
@@ -48,6 +48,8 @@ class AddStudent extends React.Component{
             console.log("This is the content");
             console.log(content);
           })();
+
+          this.props.close();
     }
     
 

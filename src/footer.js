@@ -57,7 +57,7 @@ function Footer(props){
                     >
 
                     <div style={modalStyle} className={classes.paper}>
-                        <AddStudent close ={()=>handleClose}/>
+                        <AddStudent close ={()=>setOpen(false)}/>
                     </div>
                     
                 </Modal>
