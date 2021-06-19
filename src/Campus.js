@@ -1,5 +1,4 @@
 import Footer from './footer'
-import Add from './addCampus'
 import DisplayInfo from'./displayInfo';
 
 function Campus (){

@@ -1,13 +1,12 @@
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from'@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
+
 import { AppBar } from '@material-ui/core'
 import { Button } from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home';
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import React from 'react';
-import ReactDom from 'react-dom'
 import MainPage from'./mainPage'
 import Campus from './Campus'
 import Students from './Students'

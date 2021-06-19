@@ -1,10 +1,9 @@
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Button } from '@material-ui/core'
 import {Link} from 'react-router-dom'
-import { Card } from '@material-ui/core';
-import { CardActions } from '@material-ui/core';
-import { makeStyles, mergeClasses } from '@material-ui/styles';
-import { CardContent } from '@material-ui/core';
+
+import { makeStyles } from '@material-ui/styles';
+
 import { Grid } from '@material-ui/core';
 import React, {useState, useEffect} from 'react';
 
@@ -53,7 +52,7 @@ const DisplayInfo = (props) => {
                 
 
 
-                    <Link style ={{textDecoration: 'none'}}><Button size ='small'>See More</Button></Link>
+                    <Link to='/' style ={{textDecoration: 'none'}}><Button size ='small'>See More</Button></Link>
                     </Grid>  
                    
                     <Grid item>

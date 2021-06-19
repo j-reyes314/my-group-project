@@ -1,12 +1,12 @@
 let express = require('express');
 let {Sequelize} = require('sequelize');
-const cors = require('cors');
+// const cors = require('cors');
 
 
 let app = express();
 
 
-app.use(cors());
+// app.use(cors());
 
 // app.use(express.urlencoded({extended:true}));
 
@@ -17,7 +17,7 @@ let server = app.listen(0, () => {
     console.log('Listening', server.address().port)
   })
 
-var sequelize = new Sequelize('postgres://postgres:Pg3600@localhost:3001/studentcampus');
+var sequelize = new Sequelize('postgres://postgres:peekaboo@localhost:5432/postgres');
 
 let Student = sequelize.define('Student',{
     firstname: Sequelize.STRING,
@@ -33,8 +33,6 @@ let Student = sequelize.define('Student',{
 // }catch(er){
 //     console.log("Some error", er);
 // }
-
-
 app.get('/Students', async function(request, response) {
     // dStuent.findAll().then(students => res.json(students))
 
