@@ -84,7 +84,7 @@ class Campus extends React.Component{
                 </Grid>
             </Grid>
 
-            <footer><Footer isStudent ={true}/></footer>
+            <footer><Footer isStudent ={false}/></footer>
             </div>
         )
     }

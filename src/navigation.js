@@ -26,7 +26,7 @@ function Navigation(){
             <Link to='/'><HomeIcon/></Link>
           </IconButton>
 
-          <Link to='/Campus' style ={{textDecoration: 'none'}}><Button>Campuses</Button></Link>
+          <Link to='/Campuses' style ={{textDecoration: 'none'}}><Button>Campuses</Button></Link>
           <Link to='/Students' style ={{textDecoration: 'none'}}><Button>Students</Button></Link>
 
           
@@ -40,7 +40,7 @@ function Navigation(){
       <Toolbar/>
 
         <Route exact path="/" component={MainPage} />
-        <Route path="/Campus" component={Campus} />
+        <Route path="/Campuses" component={Campus} />
         <Route path="/Students" component={Students} />
       <div className='padding'></div>
 </Router>

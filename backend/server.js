@@ -28,8 +28,8 @@ let Student = sequelize.define('Student',{
 });
 
 let Campus = sequelize.define('Campus',{
-    campusName: Sequelize.STRING,
-    imageURL: Sequelize.STRING,
+    campusname: Sequelize.STRING,
+    imageurl: Sequelize.STRING,
     address: Sequelize.STRING,
     description: Sequelize.STRING
 });
@@ -94,8 +94,8 @@ app.post('/Students', function(request, response){
 
     console.log(request.body);
 
-    let firstName = request.body.firstName;
-    let lastName = request.body.lastName;
+    let firstname = request.body.firstname;
+    let lastname = request.body.lastname;
     let email = request.body.email;
     let school= request.body.school;
     let gpa = request.body.gpa;
@@ -126,8 +126,8 @@ app.post('/Students', function(request, response){
             console.log("false");
 
             Student.create({
-                firstname: firstName,
-                lastname: lastName,
+                firstname: firstname,
+                lastname: lastname,
                 email: email,
                 school: school,
                 gpa: gpa
@@ -149,8 +149,8 @@ app.post('/Campus', function(request, response){
 
     console.log(request.body);
 
-    let campusName = request.body.campusName;
-    let imageURL = request.body.imageURL;
+    let campusname = request.body.campusname;
+    let imageurl = request.body.imageurl;
     let address = request.body.address;
     let description= request.body.description;
 
@@ -180,11 +180,10 @@ app.post('/Campus', function(request, response){
             console.log("false");
 
             Campus.create({
-                campusname: campusName,
-                imageurl: imageURL,
-                email: address,
-                school: description,
-                gpa: gpa
+                campusname: campusname,
+                imageurl: imageurl,
+                address: address,
+                description: description,
             });
 
         }else{
