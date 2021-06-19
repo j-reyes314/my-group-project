@@ -31,8 +31,10 @@ const DisplayInfo = (props) => {
   const[studentInfo, setStudentInfo] = useState(defaultnames)
 
   useEffect(()=>{
-      
+      setStudentInfo(props.data);
   })
+
+ 
 
     return(
         
