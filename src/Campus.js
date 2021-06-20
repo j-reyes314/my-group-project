@@ -3,6 +3,7 @@ import DisplayCampus from './displayCampus';
 import { Grid } from '@material-ui/core';
 import React from 'react';
 import axios from 'axios';
+import FormRow from './formRow';
 
 
 class Campus extends React.Component{
@@ -50,13 +51,33 @@ class Campus extends React.Component{
      }
      fetchData();
     }
+
+    createGrid(arr){
+        for (let i =0; i <this.state.campusArray.length/3; i++){
+            arr[i] = this.state.campusArray.slice(i*3,(i*3)+3);
+            arr[i] = arr[i].map(element => <DisplayCampus key={element.id} data ={element}/>)
+            
+            if(i+1 == this.state.campusArray.length/3 && this.state.campusArray.length%3 > 0 ){
+                arr[i+1] = this.state.campusArray.slice((i+1)*3,this.campusArray.length);
+                arr[i+1] =arr[i].map(element => <DisplayCampus key={element.id} data ={element}/>);
+            }
+           
+        }
+        for(let j =0; j < arr.length;j++){
+            arr[j] = <FormRow arr ={arr[j]}/>
+            
+
+        }
+
+        return arr;
+    }
     
     render(){ 
 
         let arr =[];
-        {this.state.campusArray != '' ? arr = this.state.campusArray.map(element => <DisplayCampus key={element.id} data={element}/>):
+        {this.state.campusArray != '' ? arr = this.createGrid(arr):
         arr = <h1 styles ={{fontSize: '20pt'}}>There are no Campuses registered in database</h1>};
-    
+      
         return( 
             <div className='interface'>
 

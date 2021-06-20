@@ -8,6 +8,8 @@ import axios from 'axios'
 // import DisplayInfo from './displayInfo'
 import Lehman_College from './Lehman_College.jpg'
 import student_photo from './student_photo.jpg'
+import DisplayStudents from './displayStudents'
+import FormRow from './formRow'
 
 import './mainPage.css'
 
@@ -63,6 +65,26 @@ console.log(studentArr);
 
 }
 
+const createGrid= (arr) =>{
+  for (let i =0; i <students.length/3; i++){
+      arr[i] = students.slice(i*3,(i*3)+3);
+      arr[i] = arr[i].map(element => <DisplayStudents key={element.id} data ={element}/>)
+      
+      if(i+1 == students.length/3 && this.state.studentArray.length%3 > 0 ){
+          arr[i+1] = students.slice((i+1)*3,this.studentArray.length);
+          arr[i+1] =arr[i].map(element => <DisplayStudents key={element.id} data ={element}/>);
+      }
+     
+  }
+  for(let j =0; j < arr.length;j++){
+      arr[j] = <FormRow arr ={arr[j]}/>
+      
+
+  }
+
+  return arr;
+};
+
       
 
  // const classes = useStyles();
@@ -89,10 +111,7 @@ console.log(studentArr);
                 <Grid container item>
                   <Grid container spacing={1}>
                     <Grid container item xs={12} spacing={3}>
-                      {/* <FormRow name = 'Campus' /> */}
-                    </Grid>
-                    <Grid container item xs={12} spacing={3}>
-                      {/* <FormRow name = 'Campus' /> */}
+                      {/* <FormRow arr ={students}/> */}
                     </Grid>
                   </Grid>
                 </Grid>

@@ -1,17 +1,35 @@
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Button, Grid } from '@material-ui/core'
+import { Button, Grid,Card } from '@material-ui/core'
 import {Link} from 'react-router-dom'
 import { makeStyles } from '@material-ui/styles';
 import React, {useState, useEffect} from 'react';
 
-const useStyles = makeStyles({
-    root:{
-        minWidth:275,
-    },
-    pos:{
-        marginBottom: 12,
-    }
-})
+// const useStyles = makeStyles({
+//     root:{
+//         minWidth:275,
+//     },
+//     pos:{
+//         marginBottom: 12,
+//     }
+
+    
+// })
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: '2px',
+  },
+  pos:{
+            marginBottom: 12,
+        },
+  paper: {
+    maxWidth: 400,
+    margin: '10px auto',
+    padding: 2,
+  },
+}));
 
 // const defaultNames=()=>{[id: '',
 // firstname: 'hello',
@@ -38,10 +56,10 @@ const DisplayStudents = (props) => {
 
     return(
         
-            <div className= {styles.pos}>
-              <Grid container spacing ={0}>
-             
-                  <Grid item>
+            <div className= {styles.root}>
+              <Grid container spacing ={0} zeroMinWidth>
+              <Card cardName ={styles.paper}>
+                {/* <Grid item> */}
                   
 
                     <h1>{studentInfo.firstname} {studentInfo.lastname}</h1>
@@ -50,12 +68,14 @@ const DisplayStudents = (props) => {
 
 
                     <Link to='/' style ={{textDecoration: 'none'}}><Button size ='small'>See More</Button></Link>
-                    </Grid>  
-                   
-                    <Grid item>
-                <Button><DeleteIcon/></Button>
-                </Grid>  
-                </Grid>
+                  
+                {/* </Grid>   */}
+                
+                {/* <Grid item> */}
+                  <Button><DeleteIcon/></Button>
+                {/* </Grid> */}
+                </Card>  
+              </Grid>
             </div>
      
     )

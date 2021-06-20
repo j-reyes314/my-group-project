@@ -11,7 +11,8 @@ class Students extends React.Component{
         super(props);
         this.state = {
             name: "",
-            studentArray: []
+            studentArray: [],
+            toggle: false,
 
         }
 
@@ -25,19 +26,26 @@ class Students extends React.Component{
     let studentArrayNames = [];
     for(let i = 0; i < response.data.length ; i++){
         studentArrayNames[i] = response.data[i];
-        console.log(studentArrayNames[i].firstname);
+        // console.log(studentArrayNames[i].firstname);
     }
-  
+    if(this.state.studentArray != studentArrayNames){
     this.setState({
         studentArray: studentArrayNames
-    })
+    })}
 
     })
     .catch(error => {
       console.log(error);
     });
+
+    // this.toggled()
     
  }
+
+    toggled = ()=> this.setState({
+        toggle: 
+        !this.state.toggle,
+    },()=> console.log(this.state.toggle))
 
     componentDidMount(){
 
@@ -64,6 +72,10 @@ class Students extends React.Component{
      fetchData();
     }
 
+    componentDidUpdate(){
+        this.fetchData();
+    }
+
     createGrid(arr){
         for (let i =0; i <this.state.studentArray.length/3; i++){
             arr[i] = this.state.studentArray.slice(i*3,(i*3)+3);
@@ -88,43 +100,25 @@ class Students extends React.Component{
 
         let arr =[];
         {this.state.studentArray != '' ? arr = this.createGrid(arr):
-        arr = <h1 styles ={{fontSize: '20pt'}}>There are no Campuses registered in database</h1>};
+        arr = <h1 styles ={{fontSize: '20pt'}}>There are no Students registered in database</h1>};
         
        
-
-        
-
-            // arr[0] = this.state.studentArray.slice(0,3);
-            console.log(arr[0]);
-            
-            // .map(element => <DisplayStudents key = {element.id} data ={element}/>)
-
-
-        
-
-        // {this.state.studentArray != '' ?  arr = this.state.studentArray.map(element => {element.id%3==0 ? <DisplayStudents key={element.id} data={element}/>:''}):
-        // arr = <h1 styles ={{fontSize: '20pt'}}>There are no Students registered in database</h1>};
-    
-  
         return( 
             <div className='interface'>
             <div>
             <h1 syle ={{fontSize: '40pt'}}>Students</h1>
-            <Footer close={()=>this.fetchData()} isStudent ={true}/>
+            <Footer close={()=>(this.fetchData(),this.toggled())} isStudent ={true}/>
             </div>
       
             
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm container>
+            <Grid container spacing={0} >
+                <Grid item xs={0} sm container>
                     <Grid container item>
-                        <Grid container spacing={1}>
-                            <Grid container item xs={12} spacing={3}>
-                            {/* <FormRow name = {this.state.studentArray[0]} /> */}
+                        <Grid container spacing={0} style ={{flexGrow: '1'}}>
+                            <Grid container item xs={8} spacing={4}  style={{padding: '2em'}}>
                                 {arr}
                             </Grid>
-                            {/* <Grid container item xs={12} spacing={3}>
-                            <FormRow name = {this.state.name} />
-                            </Grid> */}
+                           
                         </Grid>
                     </Grid>
                 </Grid>

@@ -1,5 +1,5 @@
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Button, Grid } from '@material-ui/core'
+import { Button, Grid,Card } from '@material-ui/core'
 import {Link} from 'react-router-dom'
 import { makeStyles } from '@material-ui/styles';
 import React, {useState, useEffect} from 'react';
@@ -40,8 +40,8 @@ const DisplayCampus = (props) => {
         
             <div className= {styles.pos}>
               <Grid container spacing ={0}>
-             
-                  <Grid item>
+                <Card>
+                  {/* <Grid item> */}
                   
 
                     <h1>{campusInfo.campusname}</h1>
@@ -50,11 +50,12 @@ const DisplayCampus = (props) => {
 
 
                     <Link to='/' style ={{textDecoration: 'none'}}><Button size ='small'>See More</Button></Link>
-                    </Grid>  
+                    {/* </Grid>   */}
                    
-                    <Grid item>
+                    {/* <Grid item> */}
                 <Button><DeleteIcon/></Button>
-                </Grid>  
+                {/* </Grid>   */}
+                </Card>
                 </Grid>
             </div>
      
