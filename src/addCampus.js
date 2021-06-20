@@ -1,7 +1,5 @@
 import React from 'react';
-import {Button} from '@material-ui/core'
-import FormGroup from '@material-ui/core/FormGroup';
-import { TextField } from '@material-ui/core';
+import {Button, TextField} from '@material-ui/core'
 
 
 class AddCampus extends React.Component{
@@ -48,6 +46,8 @@ class AddCampus extends React.Component{
             console.log("This is the content");
             console.log(content);
           })();
+
+          this.props.close();
     }
 
     render(){
@@ -90,10 +90,8 @@ class AddCampus extends React.Component{
                     name ='description'
                     label='description'
                     placeholder='Description' />
-                <input type="submit" />
+                <Button variant='contained' type="submit">Submit</Button>
 
-                {/* <Button><AddCircleIcon type ="submit"/></Button> */}
-                {/* change url type */}
              </form>
         )
     }

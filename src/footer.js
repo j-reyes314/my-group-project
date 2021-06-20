@@ -80,7 +80,7 @@ function Footer(props){
                     >
                     
                     <div style ={modalStyle} className={classes.paper}>
-                        <AddCampus/>
+                        <AddCampus close={() => handleClose()}/>
                     </div>
 
                 </Modal>

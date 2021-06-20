@@ -12,10 +12,8 @@ class Students extends React.Component{
         this.state = {
             name: "",
             studentArray: [],
-            toggle: false,
 
         }
-
 
     }
 
@@ -37,15 +35,7 @@ class Students extends React.Component{
     .catch(error => {
       console.log(error);
     });
-
-    // this.toggled()
-    
  }
-
-    toggled = ()=> this.setState({
-        toggle: 
-        !this.state.toggle,
-    },()=> console.log(this.state.toggle))
 
     componentDidMount(){
 
@@ -107,7 +97,7 @@ class Students extends React.Component{
             <div className='interface'>
             <div>
             <h1 syle ={{fontSize: '40pt'}}>Students</h1>
-            <Footer close={()=>(this.fetchData(),this.toggled())} isStudent ={true}/>
+            <Footer close={()=>(this.fetchData())} isStudent ={true}/>
             </div>
       
             

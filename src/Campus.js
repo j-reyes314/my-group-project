@@ -17,6 +17,27 @@ class Campus extends React.Component{
 
     }
 
+    fetchData = async() => {
+        // console.log("w.e");
+        const result = await
+    axios.get("http://localhost:3002/Students").then(response => {
+    let studentArrayNames = [];
+    for(let i = 0; i < response.data.length ; i++){
+        studentArrayNames[i] = response.data[i];
+        // console.log(studentArrayNames[i].firstname);
+    }
+    if(this.state.studentArray != studentArrayNames){
+        this.setState({
+            studentArray: studentArrayNames
+        })
+    }
+
+    })
+    .catch(error => {
+      console.log(error);
+    });
+ }
+
     componentDidMount(){
         // query get student info here and setState
         // console.log("setting state");
@@ -52,6 +73,10 @@ class Campus extends React.Component{
      fetchData();
     }
 
+    componentDidUpdate(){
+        this.fetchData();
+    }
+
     createGrid(arr){
         for (let i =0; i <this.state.campusArray.length/3; i++){
             arr[i] = this.state.campusArray.slice(i*3,(i*3)+3);
@@ -83,24 +108,21 @@ class Campus extends React.Component{
 
                 <div>
                     <h1>Campuses</h1>
-                    <Footer close={()=>console.log('')} isStudent ={false}/>
+                    <Footer close={()=>(this.fetchData())} isStudent ={false}/>
                 </div>
-                {arr}
             
-            {/* <Grid container spacing={2}>
-            <Grid item xs={12} sm container>
+                <Grid container spacing={0} >
+                <Grid item xs={0} sm container>
                     <Grid container item>
-                    <Grid container spacing={1}>
-                        <Grid container item xs={12} spacing={3}>
-                        <FormRow name = {this.state.campusArray[0]} />
+                        <Grid container spacing={0} style ={{flexGrow: '1'}}>
+                            <Grid container item xs={8} spacing={4}  style={{padding: '2em'}}>
+                                {arr}
+                            </Grid>
+                           
                         </Grid>
-                        <Grid container item xs={12} spacing={3}>
-                        <FormRow name = {this.state.name} />
-                        </Grid>
-                    </Grid>
                     </Grid>
                 </Grid>
-            </Grid> */}
+            </Grid>
 
             
             </div>
