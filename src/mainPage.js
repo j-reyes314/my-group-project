@@ -3,14 +3,15 @@ import  ButtonBase  from '@material-ui/core/ButtonBase'
 import { Card } from '@material-ui/core'
 import { Typography } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
-
+import axios from 'axios'
 // import { makeStyles } from '@material-ui/core'
-import DisplayInfo from './displayInfo'
+// import DisplayInfo from './displayInfo'
 import Lehman_College from './Lehman_College.jpg'
+import student_photo from './student_photo.jpg'
 
 import './mainPage.css'
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link } from 'react-router-dom'
 
 
@@ -34,22 +35,35 @@ import {Link } from 'react-router-dom'
 
 
 function MainPage(){
+  const [students,setStudents] = useState();
+  const [campus, setCampus] = useState([]);
 
-  function FormRow({name}) {
-    return (
-      <React.Fragment>
-        <Grid item xs={4}>
-        <DisplayInfo name ={name} />
-        </Grid>
-        <Grid item xs={4}>
-          <DisplayInfo name ={name}/>
-        </Grid>
-        <Grid item xs={4}>
-          <DisplayInfo name ={name}/>
-        </Grid>
-      </React.Fragment>
-    );
-  }
+
+  useEffect(()=>{
+    fetchData();
+
+  },[]);
+
+  const fetchData = async() => {
+    // console.log("w.e");
+    const result = await
+axios.get("http://localhost:3002/Students").then(response => {
+    console.log(response.data[0]);
+    let studentArr = [];
+for(let i = 0; i < 3 ; i++){
+  studentArr[i] =response.data[i];
+  
+}
+setStudents(studentArr);
+console.log(studentArr);
+})
+.catch(error => {
+  console.log(error);
+});
+
+}
+
+      
 
  // const classes = useStyles();
     return(
@@ -57,23 +71,16 @@ function MainPage(){
           <div className='interface'>
   
             <Grid container spacing={2}>
+
+              {/* Grid item containing button to all campus page */}
+
               <Grid item xs={4} style= {{height: ""}}  >
-                {/* <ButtonBase className={classes.image}>
-                <img className={classes.img} src={Lehman_College} alt="school" />
-                
-                </ButtonBase>
-                <Typography gutterBottom variant="h5" component="h2">
-            See All Campuses
-            </Typography> */}
                 <Card className='see-all' style = {{height: "100%"}}>
-                         <Link  to='/Campus' style ={{textDecoration: 'none'}}>
-                           <ButtonBase>
-                             <img  alt="complex" src={Lehman_College} />
-                             <Typography gutterBottom variant="h5" component="h2">
-            See All Campuses
-          </Typography>
-                                {/* <CardContent>See All Campuses </CardContent>  */}
-                         </ButtonBase>
+                         <Link  to='/Campuses' style ={{textDecoration: 'none'}}>
+                            <ButtonBase>
+                              <img  alt="complex" src={Lehman_College} />
+                              <Typography gutterBottom variant="h5" component="h2">See All Campuses</Typography>
+                            </ButtonBase>
                        </Link>
                 </Card>
               </Grid>
@@ -91,14 +98,14 @@ function MainPage(){
                 </Grid>
               </Grid>
           </Grid>
-{/* begin code */}
+
             <Grid container spacing={2}>
               <Grid item xs={4} style= {{height: ""}} >
                 <Card className='see-all'>
 
                 <Link  to='/Students' style ={{textDecoration: 'none'}}>
                   <ButtonBase>
-
+                  <img  alt="complex" src={student_photo} />
                   <Typography gutterBottom variant="h5" component="h2">See All Students</Typography>
                   </ButtonBase>
                 </Link>

@@ -26,7 +26,7 @@ const defaultnames =({
 
 
 
-const DisplayInfo = (props) => {
+const DisplayStudents = (props) => {
   const styles = useStyles();
   const[studentInfo, setStudentInfo] = useState(defaultnames)
 
@@ -61,4 +61,4 @@ const DisplayInfo = (props) => {
     )
 }
 
-export default DisplayInfo;
+export default DisplayStudents;

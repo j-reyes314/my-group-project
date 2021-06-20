@@ -1,24 +1,10 @@
 import Footer from'./footer';
-import DisplayInfo from './displayInfo';
+import DisplayStudents from './displayStudents';
 import { Grid } from '@material-ui/core';
 import React from 'react';
 import axios from 'axios';
+import FormRow from './formRow';
 
-function FormRow({name}) {
-    return (
-        <React.Fragment>
-        <Grid item xs={4}>
-        <DisplayInfo name ={name} />
-        </Grid>
-        <Grid item xs={4}>
-            <DisplayInfo name ={name}/>
-        </Grid>
-        <Grid item xs={4}>
-            <DisplayInfo name ={name}/>
-        </Grid>
-        </React.Fragment>
-    );
-}
 
 class Students extends React.Component{
     constructor(props){
@@ -77,38 +63,73 @@ class Students extends React.Component{
      }
      fetchData();
     }
+
+    createGrid(arr){
+        for (let i =0; i <this.state.studentArray.length/3; i++){
+            arr[i] = this.state.studentArray.slice(i*3,(i*3)+3);
+            arr[i] = arr[i].map(element => <DisplayStudents key={element.id} data ={element}/>)
+            
+            if(i+1 == this.state.studentArray.length/3 && this.state.studentArray.length%3 > 0 ){
+                arr[i+1] = this.state.studentArray.slice((i+1)*3,this.studentArray.length);
+                arr[i+1] =arr[i].map(element => <DisplayStudents key={element.id} data ={element}/>);
+            }
+           
+        }
+        for(let j =0; j < arr.length;j++){
+            arr[j] = <FormRow arr ={arr[j]}/>
+            
+
+        }
+
+        return arr;
+    }
     
     render(){ 
 
         let arr =[];
-        {this.state.studentArray != '' ? arr = this.state.studentArray.map(element => <DisplayInfo key={element.id} data={element}/>):
-        arr = <h1 styles ={{fontSize: '20pt'}}>There are no Students registered in database</h1>};
-        // arr = this.state.studentArray.map(element => <DisplayInfo key={element.id} data={element}/>);
+        {this.state.studentArray != '' ? arr = this.createGrid(arr):
+        arr = <h1 styles ={{fontSize: '20pt'}}>There are no Campuses registered in database</h1>};
+        
+       
+
+        
+
+            // arr[0] = this.state.studentArray.slice(0,3);
+            console.log(arr[0]);
+            
+            // .map(element => <DisplayStudents key = {element.id} data ={element}/>)
 
 
+        
+
+        // {this.state.studentArray != '' ?  arr = this.state.studentArray.map(element => {element.id%3==0 ? <DisplayStudents key={element.id} data={element}/>:''}):
+        // arr = <h1 styles ={{fontSize: '20pt'}}>There are no Students registered in database</h1>};
+    
+  
         return( 
             <div className='interface'>
             <div>
-            <h1>Students</h1>
+            <h1 syle ={{fontSize: '40pt'}}>Students</h1>
             <Footer close={()=>this.fetchData()} isStudent ={true}/>
             </div>
       
             
-            {/* <Grid container spacing={2}>
-            <Grid item xs={12} sm container>
+            <Grid container spacing={2}>
+                <Grid item xs={12} sm container>
                     <Grid container item>
-                    <Grid container spacing={1}>
-                        <Grid container item xs={12} spacing={3}>
-                        <FormRow name = {this.state.studentArray[0]} />
+                        <Grid container spacing={1}>
+                            <Grid container item xs={12} spacing={3}>
+                            {/* <FormRow name = {this.state.studentArray[0]} /> */}
+                                {arr}
+                            </Grid>
+                            {/* <Grid container item xs={12} spacing={3}>
+                            <FormRow name = {this.state.name} />
+                            </Grid> */}
                         </Grid>
-                        <Grid container item xs={12} spacing={3}>
-                        <FormRow name = {this.state.name} />
-                        </Grid>
-                    </Grid>
                     </Grid>
                 </Grid>
-            </Grid> */}
-            {arr}
+            </Grid>
+            
 
             </div>
         )
