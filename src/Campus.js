@@ -62,7 +62,7 @@ class Campus extends React.Component{
 
                 <div>
                     <h1>Campuses</h1>
-                    <Footer close={()=>this.fetchData()} isStudent ={false}/>
+                    <Footer close={()=> console.log("test")} isStudent ={false}/>
                 </div>
                 {arr}
             

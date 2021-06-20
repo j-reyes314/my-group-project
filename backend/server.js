@@ -17,7 +17,7 @@ let server = app.listen(0, () => {
     console.log('Listening', server.address().port)
   })
 
-var sequelize = new Sequelize('postgres://postgres:peekaboo@localhost:5432/postgres');
+var sequelize = new Sequelize('postgres://postgres:Pg3600@localhost:3001/studentcampus');
 
 let Student = sequelize.define('Student',{
     firstname: Sequelize.STRING,
@@ -28,7 +28,10 @@ let Student = sequelize.define('Student',{
 });
 
 let Campus = sequelize.define('Campus',{
-    campusname: Sequelize.STRING,
+    id: {type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true},
+    campusname: {type: Sequelize.STRING},
     imageurl: Sequelize.STRING,
     address: Sequelize.STRING,
     description: Sequelize.STRING
@@ -193,6 +196,20 @@ app.post('/Campus', function(request, response){
 
     response.send("The campus form has been received");
     
+
+});
+
+app.delete('/Campus', async function(request, response){
+
+    let test2 =  Campus.destroy({
+        where: {
+            id: request.body.id
+        }
+    });
+
+    console.log(test2);
+
+    response.json(test2);
 
 });
 

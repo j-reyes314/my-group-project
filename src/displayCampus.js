@@ -25,7 +25,6 @@ const defaultnames =({
 })
 
 
-
 const DisplayCampus = (props) => {
   const styles = useStyles();
   const[campusInfo, setCampusInfo] = useState(defaultnames)
@@ -33,6 +32,22 @@ const DisplayCampus = (props) => {
   useEffect(()=>{
       setCampusInfo(props.data);
   })
+
+  function onDelete()  {
+    alert("Deleting '" + props.data.campusname + "' id #: " + props.data.id);
+
+    fetch('/Campus', {
+    method: 'DELETE',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        id: props.data.id
+    })
+})
+
+  }
 
  
 
@@ -53,7 +68,9 @@ const DisplayCampus = (props) => {
                     </Grid>  
                    
                     <Grid item>
-                <Button><DeleteIcon/></Button>
+
+                    {/* <button onClick={() => this.props.onDelete(this.props.id)}>Delete</button> */}
+                <Button onClick={()=> onDelete()}><DeleteIcon/></Button>
                 </Grid>  
                 </Grid>
             </div>
