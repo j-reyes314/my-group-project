@@ -3,6 +3,9 @@ import { Button, Grid } from '@material-ui/core'
 import {Link} from 'react-router-dom'
 import { makeStyles } from '@material-ui/styles';
 import React, {useState, useEffect} from 'react';
+import AddCampus from './addCampus'
+import Modal from '@material-ui/core/Modal';
+
 
 const useStyles = makeStyles({
     root:{
@@ -49,6 +52,24 @@ const DisplayCampus = (props) => {
 
   }
 
+  function onEdit()  {
+    alert("Editing '" + props.data.campusname + "' id #: " + props.data.id);
+
+
+
+//     fetch('/Campus', {
+//     method: 'DELETE',
+//     headers: {
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({
+//         id: props.data.id
+//     })
+// })
+
+  }
+
  
 
     return(
@@ -69,7 +90,7 @@ const DisplayCampus = (props) => {
                    
                     <Grid item>
 
-                    {/* <button onClick={() => this.props.onDelete(this.props.id)}>Delete</button> */}
+                    <button onClick={() => onEdit()}>Edit</button>
                 <Button onClick={()=> onDelete()}><DeleteIcon/></Button>
                 </Grid>  
                 </Grid>
