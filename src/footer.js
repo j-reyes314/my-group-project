@@ -48,7 +48,7 @@ function Footer(props){
         return  (
             <div >
                 
-                <Button type="button" onClick={handleOpen}>Add Student</Button>
+                <Button variant ="contained" size='large' type="button" onClick={handleOpen}>Add Student</Button>
 
                 <Modal
                     open={open}
@@ -58,7 +58,7 @@ function Footer(props){
                     >
 
                     <div style={modalStyle} className={classes.paper}>
-                        <AddStudent close ={() => handleClose()}/>
+                        <AddStudent close ={() =>( handleClose())}/>
                     </div>
                     
                 </Modal>
@@ -70,7 +70,7 @@ function Footer(props){
 
         return( 
             <div>
-                <Button type="button" onClick={handleOpen}>Add Campus</Button>
+                <Button variant ="contained" size='large' type="button" onClick={handleOpen}>Add Campus</Button>
 
                 <Modal 
                     open={open}

@@ -10,6 +10,7 @@ class AddStudent extends React.Component{
             firstName: "",
             lastName: "",
             email: "",
+            imageURL: "",
             school: "",
             gpa: 0,
         }
@@ -33,7 +34,7 @@ class AddStudent extends React.Component{
         
     
         let values = this.state;
-        alert("We submitted a form with this data " + values.firstName);
+        // alert("We submitted a form with this data " + values.firstName);
 
         (async () => {
             const rawResponse = await fetch('/Students', {
@@ -47,9 +48,10 @@ class AddStudent extends React.Component{
             const content = await rawResponse.json();
             console.log("This is the content");
             console.log(content);
+            this.props.close();
           })();
-
-          this.props.close();
+          
+          
     }
     
 
@@ -58,6 +60,7 @@ class AddStudent extends React.Component{
             <form onSubmit={this.formSubmitHandler} className ='insert' >
 
                 <TextField
+                    required    
                     variant='filled'
                     color='secondary'
                     type='text'
@@ -67,6 +70,7 @@ class AddStudent extends React.Component{
                     label='firstName'
                     placeholder='First Name'/>
                 <TextField
+                    required
                     variant='filled'
                     color='secondary'
                     type='text'
@@ -76,6 +80,7 @@ class AddStudent extends React.Component{
                     label='lastName'
                     placeholder='Last Name' />
                 <TextField
+                    required
                     variant='filled'
                     color='secondary'
                     type='email'
@@ -85,6 +90,17 @@ class AddStudent extends React.Component{
                     label='email'
                     placeholder='Email' />
                 <TextField
+                    required
+                    variant='filled'
+                    color='secondary'
+                    type='text'
+                    value = {this.state.imageURL} 
+                    onChange={this.handleFormChanges}
+                    name= 'imageURL'
+                    label='imageURL'
+                    placeholder='Image URL' />
+                <TextField
+                    required
                     variant='filled'
                     color='secondary'
                     type='text'
@@ -94,6 +110,7 @@ class AddStudent extends React.Component{
                     label='school'
                     placeholder='University' />
                 <TextField
+                    required
                     variant='filled'
                     color='secondary'
                     type='number'
