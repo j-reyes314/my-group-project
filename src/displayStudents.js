@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import React, {useState, useEffect} from 'react';
 import { Modal } from '@material-ui/core';
-import { useForm } from "react-hook-form"
 import shadows from '@material-ui/core/styles/shadows';
 import { spacing } from '@material-ui/system';
 
