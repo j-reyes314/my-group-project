@@ -11,7 +11,8 @@ class Campus extends React.Component{
         super(props);
         this.state = {
             name: "",
-            campusArray: []
+            campusArray: [],
+            toggle: false
         }
 
 
@@ -21,14 +22,14 @@ class Campus extends React.Component{
         // console.log("w.e");
         const result = await
     axios.get("http://localhost:3002/Students").then(response => {
-    let studentArrayNames = [];
+    let campusArrayNames = [];
     for(let i = 0; i < response.data.length ; i++){
-        studentArrayNames[i] = response.data[i];
+        campusArrayNames[i] = response.data[i];
         // console.log(studentArrayNames[i].firstname);
     }
-    if(this.state.studentArray != studentArrayNames){
+    if(this.state.campusArray != campusArrayNames){
         this.setState({
-            studentArray: studentArrayNames
+            campusArray: campusArrayNames
         })
     }
 
@@ -39,52 +40,25 @@ class Campus extends React.Component{
  }
 
     componentDidMount(){
-        // query get student info here and setState
-        // console.log("setting state");
-        // this.setState({
-        //     name: "hello"
-        // })
-        const fetchData = async() => {
-            // console.log("w.e");
-            const result = await
-        axios.get("http://localhost:3002/Campus").then(response => {
-        let campusArrayNames = [];
-        for(let i = 0; i < response.data.length ; i++){
-          //  campusArrayNames[i] = (response.data[i].campusname + " " + response.data[i].address);
-            campusArrayNames[i] = response.data[i];
-            //console.log(studentArrayNames[i].firstname);
-        }
-        this.setState({
-            campusArray: campusArrayNames
-        })
-        // this.setState({studentArray: response.data.data})
-        
-        // console.log(campusArrayNames);
-        // console.log(response.data);
-        // console.log(response.data[0]);
-        // console.log(response.data[0].campusname);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-        // console.log(fetchData);
-        // console.log("after await")
-     }
-     fetchData();
+       
+     this.fetchData();
     }
 
-    componentDidUpdate(){
+    toggled(){
         this.fetchData();
+        this.setState({
+            toggle: !this.state.toggle,
+        })
     }
 
     createGrid(arr){
         for (let i =0; i <this.state.campusArray.length/3; i++){
             arr[i] = this.state.campusArray.slice(i*3,(i*3)+3);
-            arr[i] = arr[i].map(element => <DisplayCampus key={element.id} data ={element}/>)
+            arr[i] = arr[i].map(element => <DisplayCampus key={element.id} close={()=> this.toggled()} data ={element}/>)
             
             if(i+1 == this.state.campusArray.length/3 && this.state.campusArray.length%3 > 0 ){
                 arr[i+1] = this.state.campusArray.slice((i+1)*3,this.campusArray.length);
-                arr[i+1] =arr[i].map(element => <DisplayCampus key={element.id} data ={element}/>);
+                arr[i+1] =arr[i].map(element => <DisplayCampus key={element.id} close={()=> this.toggled()} data ={element}/>);
             }
            
         }
@@ -108,7 +82,7 @@ class Campus extends React.Component{
 
                 <div>
                     <h1>Campuses</h1>
-                    <Footer close={()=>(this.fetchData())} isStudent ={false}/>
+                    <Footer close={()=> this.toggled()} isStudent ={false}/>
                 </div>
             
                 <Grid container spacing={0} >

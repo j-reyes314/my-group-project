@@ -68,6 +68,7 @@ const DisplayCampus = (props) => {
     })
 })
 
+props.close();
   }
 
   const handleOpen = () => {

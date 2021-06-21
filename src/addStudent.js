@@ -47,9 +47,10 @@ class AddStudent extends React.Component{
             const content = await rawResponse.json();
             console.log("This is the content");
             console.log(content);
+            this.props.close();
           })();
 
-          this.props.close();
+          
     }
     
 
@@ -58,6 +59,7 @@ class AddStudent extends React.Component{
             <form onSubmit={this.formSubmitHandler} className ='insert' >
 
                 <TextField
+                    required    
                     variant='filled'
                     color='secondary'
                     type='text'
@@ -67,6 +69,7 @@ class AddStudent extends React.Component{
                     label='firstName'
                     placeholder='First Name'/>
                 <TextField
+                    required
                     variant='filled'
                     color='secondary'
                     type='text'
@@ -76,6 +79,7 @@ class AddStudent extends React.Component{
                     label='lastName'
                     placeholder='Last Name' />
                 <TextField
+                    required
                     variant='filled'
                     color='secondary'
                     type='email'
@@ -85,6 +89,7 @@ class AddStudent extends React.Component{
                     label='email'
                     placeholder='Email' />
                 <TextField
+                    required
                     variant='filled'
                     color='secondary'
                     type='text'
@@ -94,6 +99,7 @@ class AddStudent extends React.Component{
                     label='school'
                     placeholder='University' />
                 <TextField
+                    required
                     variant='filled'
                     color='secondary'
                     type='number'

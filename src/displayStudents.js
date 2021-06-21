@@ -110,6 +110,7 @@ const DisplayStudents = (props) => {
     })
 })
 
+props.close();
   }
 
   const handleOpen = () => {
