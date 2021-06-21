@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import React, {useState, useEffect} from 'react';
 import { Modal } from '@material-ui/core';
+import { useForm } from "react-hook-form"
 import shadows from '@material-ui/core/styles/shadows';
 import { spacing } from '@material-ui/system';
 
@@ -92,6 +93,16 @@ const DisplayStudents = (props) => {
   const [open, setOpen] = React.useState(false);
   const [modalStyle] = React.useState(getModalStyle);
 
+  const[students, setStudents] = useState({
+    id: props.data.id,
+    firstname: props.data.firstname,
+    lastName: props.data.lastname,
+    email: props.data.email,
+    school: props.data.school,
+    gpa: props.data.gpa,
+    })
+
+
   useEffect(()=>{
       setStudentInfo(props.data);
   })
@@ -108,7 +119,7 @@ const DisplayStudents = (props) => {
     body: JSON.stringify({
         id: props.data.id
     })
-})
+    })
 
   }
 
@@ -119,24 +130,21 @@ const DisplayStudents = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
+  
 
-  function onEdit()  {
-   
-    //  alert("Editing '" + props.data.campusname + "' id #: " + props.data.id);
-    
+ const onSaveEdit = (e) => {
+  e.preventDefault();
 
-
-
-//     fetch('/Campus', {
-//     method: 'DELETE',
-//     headers: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//         id: props.data.id
-//     })
-// })
+let values = students;
+console.log(values);
+    fetch('/Students', {
+    method: 'PUT',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(values)
+});
 
   }
 
@@ -168,32 +176,34 @@ const DisplayStudents = (props) => {
                       >
 
                     <div style={modalStyle} className={styles.paper}>
-                    <form onSubmit='' className ='insert' >
+                    <form onSubmit={onSaveEdit} className ='insert' >
 
                         <TextField
                             variant='filled'
                             color='secondary'
                             type='text'
-                            value = {studentInfo.firstname} 
-                            onChange=''
-                            name= 'firstName'
+                            value = {students.firstname} 
+                            defaultValue = {studentInfo.firstname}
+                            required
+                            onChange={e => setStudents({...students,firstname: e.target.value})}
+                            name= 'firstname'
                             label='firstName'
                             placeholder='First Name'/>
                         <TextField
                             variant='filled'
                             color='secondary'
                             type='text'
-                            value = {studentInfo.lastname} 
-                            onChange=''
-                            name= 'lastName'
+                            value = {students.lastName} 
+                            onChange={e => setStudents({...students,lastName: e.target.value})}
+                            name= 'lastname'
                             label='lastName'
                             placeholder='Last Name' />
                         <TextField
                             variant='filled'
                             color='secondary'
                             type='email'
-                            value = {studentInfo.email} 
-                            onChange=''
+                            value = {students.email} 
+                            onChange={e => setStudents({...students, email: e.target.value})}
                             name= 'email'
                             label='email'
                             placeholder='Email' />
@@ -201,8 +211,8 @@ const DisplayStudents = (props) => {
                             variant='filled'
                             color='secondary'
                             type='text'
-                            value = {studentInfo.school} 
-                            onChange= ''
+                            value = {students.school} 
+                            onChange= {e => setStudents({...students, school: e.target.value})}
                             name= 'school'
                             label='school'
                             placeholder='University' />
@@ -210,15 +220,15 @@ const DisplayStudents = (props) => {
                             variant='filled'
                             color='secondary'
                             type='number'
-                            value = {studentInfo.gpa} 
-                            onChange=''
+                            value = {students.gpa} 
+                            onChange={e => setStudents({...students, gpa: e.target.value})}
                             name= 'gpa'
                             step='0.01'
                             min='0'
                             max='4'
                             label='gpa'
                             placeholder='GPA' />
-                            <Button variant='contained' type="submit">Submit</Button>
+                            <Button variant='contained' type="submit">Save Changes</Button>
                             
 
                         </form>
@@ -229,9 +239,11 @@ const DisplayStudents = (props) => {
           
                 </Card>  
               </Grid>
-            </div>
+
+            </div>     
      
     )
+    
 }
 
 export default DisplayStudents;

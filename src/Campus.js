@@ -73,9 +73,9 @@ class Campus extends React.Component{
      fetchData();
     }
 
-    componentDidUpdate(){
-        this.fetchData();
-    }
+    // componentDidUpdate(){
+    //     this.fetchData();
+    // }
 
     createGrid(arr){
         for (let i =0; i <this.state.campusArray.length/3; i++){

@@ -17,9 +17,12 @@ let server = app.listen(0, () => {
     console.log('Listening', server.address().port)
   })
 
-var sequelize = new Sequelize('postgres://postgres:peekaboo@localhost:5432/postgres');
+var sequelize = new Sequelize('postgres://postgres:Pg3600@localhost:3001/studentcampus');
 
 let Student = sequelize.define('Student',{
+    id: {type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true},
     firstname: Sequelize.STRING,
     lastname: Sequelize.STRING,
     email: Sequelize.STRING,
@@ -226,6 +229,52 @@ app.delete('/Students', async function(request, response){
     response.json(test2);
 
 });
+
+app.put('/Students', async function(request, response){
+
+    let test3 =  Student.update({
+        firstname: request.body.firstname,
+        lastname: request.body.lastName,
+        email: request.body.email,
+        school: request.body.school,
+        gpa: request.body.gpa
+    },
+        {where: {
+            id: request.body.id
+        }
+    });
+
+    console.log(test3);
+
+    response.json(test3);
+
+});
+
+
+
+app.put('/Campus', async function(request, response){
+
+    let test4 =  Campus.update({
+        campusname: request.body.campusname,
+        imageurl: request.body.imageurl,
+        address: request.body.address,
+        description: request.body.description
+    },
+        {where: {
+            id: request.body.id
+        }
+    });
+
+    console.log(test4);
+
+    response.json(test4);
+
+});
+
+
+
+// find students who go to a campus
+// find campus that current student goes to
 
 console.log("Test");
 

@@ -48,7 +48,7 @@ class Students extends React.Component{
             studentArrayNames[i] = response.data[i];
             console.log(studentArrayNames[i].firstname);
         }
-      
+        
         this.setState({
             studentArray: studentArrayNames
         })
@@ -62,9 +62,9 @@ class Students extends React.Component{
      fetchData();
     }
 
-    componentDidUpdate(){
-        this.fetchData();
-    }
+    // componentDidUpdate(){
+    //     this.fetchData();
+    // }
 
     createGrid(arr){
         for (let i =0; i <this.state.studentArray.length/3; i++){
