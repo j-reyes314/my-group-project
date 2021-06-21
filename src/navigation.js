@@ -38,9 +38,10 @@ function Navigation(){
       <Toolbar/>
 
         <Route exact path="/" component={MainPage} />
-        <Route path="/Campuses" component={Campus} />
-        <Route path="/Students" component={Students} />
-        <Route path='/Students/:id' component={DynamicDisplay} />
+        <Route exact path="/Campuses" component={Campus} />
+        <Route exact path="/Students" component={Students} />
+        <Route exact path='/Students/:id' component={DynamicDisplay} />
+        <Route exact path='/Campuses/:id' component={DynamicDisplay} />
       <div className='padding'></div>
 </Router>
 

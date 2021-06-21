@@ -108,7 +108,6 @@ props.close();
     props.close()
   }
 
-<<<<<<< HEAD
 
     const studentsInCampus = () => {
 
@@ -135,9 +134,6 @@ props.close();
     
   }
  
-=======
-  
->>>>>>> 870f1896c8460032c701f6444196a17b24540048
 
     return(
         
@@ -152,7 +148,7 @@ props.close();
 
 
 
-                    <Link to='/' style ={{textDecoration: 'none'}}><Button size ='small'>See More</Button></Link>
+                    <Link to={`Campuses/${campusInfo.id}`} style ={{textDecoration: 'none'}}><Button size ='small'>See More</Button></Link>
                     <Button onClick={() => studentsInCampus()}size ='small'>studentsInCampus</Button>
             
                     <Button onClick={handleOpen}>Edit</Button>

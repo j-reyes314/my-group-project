@@ -11,7 +11,7 @@ let server = app.listen(0, () => {
     console.log('Listening', server.address().port)
   })
 
-var sequelize = new Sequelize('postgres://postgres:peekaboo@localhost:5432/postgres');
+var sequelize = new Sequelize('postgres://postgres:Pg3600@localhost:3001/studentcampus');
 
 
 let Campus = sequelize.define('Campus',{
@@ -94,6 +94,30 @@ app.get('/Campus', async function(request, response) {
     
     response.json(test2);
 })
+
+// app.get('Campuses/:id', async function(request, response) {
+
+//     let test5 =  await CampusfindOne({
+//         where:{
+//             id: id 
+//         }
+    
+// })
+//     response.json(test5);
+
+// })
+
+app.get('Campuses/:id', async(request,response) => {
+    await Campus.findById(request.params.campusId)
+    .then(campusInfo => response.json(campusInfo))
+})
+
+app.get('Students/:id', async(request,response) => {
+    await Student.findById(request.params.id)
+    .then(studentInfo => response.json(studentInfo))
+    .catch(next)
+})
+
 
 app.post('/Students', function(request, response){
 

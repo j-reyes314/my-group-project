@@ -147,13 +147,7 @@ props.close()
                 
 
 
-<<<<<<< HEAD
-                    <Link to='/' style ={{textDecoration: 'none'}}><Button size ='small'>See More</Button></Link>
-                    <Button onClick={() => campusOfStudent()}size ='small'>campusOfStudent</Button>
-                    
-=======
                     <Link to={`Students/${studentInfo.id}`} style ={{textDecoration: 'none'}}><Button size ='small'>See More</Button></Link>
->>>>>>> 870f1896c8460032c701f6444196a17b24540048
                   
                     <Button onClick={handleOpen}>Edit</Button>
                     <Button onClick={()=> onDelete()}><DeleteIcon/></Button>
