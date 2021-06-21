@@ -81,17 +81,16 @@ app.get('/Campus', async function(request, response) {
     response.json(test2);
 })
 
-app.get('/Campus/:id', async function(request, response) {
- 
-    let id = request.params.id;
-    console.log(id);
-    let test2 =  await Campus.findOne({where:{ id }});
-
-    // console.log(test2);
-
-    response.json(test2);
+app.get('Campuses/:id', async(request,response) => {
+    await Campus.findById(request.params.id)
+    .then(campusInfo => response.json(campusInfo))
 })
 
+app.get('Students/:id', async(request,response) => {
+    await Student.findById(request.params.id)
+    .then(studentInfo => response.json(studentInfo))
+    .catch(next)
+})
 app.post('/Students', function(request, response){
 
     console.log(request.body);

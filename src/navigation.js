@@ -9,7 +9,8 @@ import MainPage from'./mainPage'
 import Campus from './Campus'
 import Students from './Students'
 import { Route, BrowserRouter as Router} from 'react-router-dom'
-import DynamicDisplay from './dynamicDisplay';
+import DynamicCampus from './dynamicCampus';
+import DynamicStudents from './dynamicStudents';
 
 
 
@@ -40,8 +41,8 @@ function Navigation(){
         <Route exact path="/" component={MainPage} />
         <Route exact path="/Campuses" component={Campus} />
         <Route exact path="/Students" component={Students} />
-        <Route exact path='/Students/:id' component={DynamicDisplay} />
-        <Route exact path='/Campus/:id' component={DynamicDisplay} />
+        <Route exact path='/Students/:id' component={DynamicStudents} />
+        <Route exact path='/Campus/:id' component={DynamicCampus} />
       <div className='padding'></div>
 </Router>
 

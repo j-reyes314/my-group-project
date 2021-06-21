@@ -118,7 +118,7 @@ const DisplayCampus = (props) => {
 
 
 
-                    <Link to='/' style ={{textDecoration: 'none'}}><Button size ='small'>See More</Button></Link>
+                    <Link to={`Campus/${campusInfo.id}`} style ={{textDecoration: 'none'}}><Button size ='small'>See More</Button></Link>
             
                     <Button onClick={handleOpen}>Edit</Button>
                     <Button onClick={()=> onDelete()}><DeleteIcon/></Button>
