@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import React, {useState, useEffect} from 'react';
 import { Modal } from '@material-ui/core';
+import axios from 'axios';
 import shadows from '@material-ui/core/styles/shadows';
 import { spacing } from '@material-ui/system';
 
@@ -98,6 +99,7 @@ const DisplayStudents = (props) => {
     lastName: props.data.lastname,
     email: props.data.email,
     school: props.data.school,
+    imageurl: props.data.imageurl,
     gpa: props.data.gpa,
     })
 
@@ -147,7 +149,29 @@ console.log(values);
 
   }
 
- 
+
+  const campusOfStudent = () => {
+    
+  const fetchData = async() => {
+    console.log(studentInfo.id);
+    axios.get("http://localhost:3002/Students").then(response => {
+    let studentArray = [];
+    for(let i = 0; i < response.data.length ; i++){
+        studentArray[i] = response.data[i];
+        if(response.data[i].id === studentInfo.id){
+        alert("Match found");
+        console.log(studentArray[i].school);
+      }
+    }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+    }
+    fetchData();
+    }
+
 
     return(
         
@@ -163,6 +187,8 @@ console.log(values);
 
 
                     <Link to='/' style ={{textDecoration: 'none'}}><Button size ='small'>See More</Button></Link>
+                    <Button onClick={() => campusOfStudent()}size ='small'>campusOfStudent</Button>
+                    
                   
                     <Button onClick={handleOpen}>Edit</Button>
                     <Button onClick={()=> onDelete()}><DeleteIcon/></Button>
@@ -215,6 +241,15 @@ console.log(values);
                             name= 'school'
                             label='school'
                             placeholder='University' />
+                        <TextField
+                            variant='filled'
+                            color='secondary'
+                            type='text'
+                            value= {students.imageURL}
+                            onChange= {e => setStudents({...students, imageURL: e.target.value})}
+                            name ='imageurl'
+                            label='imageURL'
+                            placeholder='Insert Image URL' />
                         <TextField
                             variant='filled'
                             color='secondary'

@@ -3,6 +3,7 @@ import { Button, Grid,Card, TextField } from '@material-ui/core'
 import {Link} from 'react-router-dom'
 import { makeStyles } from '@material-ui/styles';
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import AddCampus from './addCampus'
 import Modal from '@material-ui/core/Modal';
 import shadows from '@material-ui/core/styles/shadows';
@@ -96,6 +97,31 @@ const DisplayCampus = (props) => {
 
   }
 
+
+    const studentsInCampus = () => {
+
+    console.log("ok")
+  
+    const fetchData = async() => {
+      console.log(campusInfo);
+      axios.get("http://localhost:3002/Campus").then(response => {
+      let studentsPerCampus = [];
+      // for(let i = 0; i < response.data.length ; i++){
+      //   studentsPerCampus[i] = response.data[i];
+      //     if(response.data[i].id === campusInfo.id){
+      //     alert("Matches found");
+      //     console.log(studentsPerCampus[i].defaultnames);
+      //   }
+      // }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  
+      }
+      fetchData();
+    
+  }
  
 
     return(
@@ -112,6 +138,7 @@ const DisplayCampus = (props) => {
 
 
                     <Link to='/' style ={{textDecoration: 'none'}}><Button size ='small'>See More</Button></Link>
+                    <Button onClick={() => studentsInCampus()}size ='small'>studentsInCampus</Button>
             
                     <Button onClick={handleOpen}>Edit</Button>
                     <Button onClick={()=> onDelete()}><DeleteIcon/></Button>

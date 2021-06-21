@@ -1,16 +1,10 @@
 let express = require('express');
 let {Sequelize} = require('sequelize');
+let app = express();
 const cors = require('cors');
 
-
-let app = express();
-
-
+app.use(express.json());
 app.use(cors());
-
-// app.use(express.urlencoded({extended:true}));
-
-app.use(express.json()); 
 
 
 let server = app.listen(0, () => {
@@ -19,77 +13,84 @@ let server = app.listen(0, () => {
 
 var sequelize = new Sequelize('postgres://postgres:Pg3600@localhost:3001/studentcampus');
 
-let Student = sequelize.define('Student',{
-    id: {type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true},
-    firstname: Sequelize.STRING,
-    lastname: Sequelize.STRING,
-    email: Sequelize.STRING,
-    school: Sequelize.STRING,
-    gpa: Sequelize.FLOAT
-});
 
 let Campus = sequelize.define('Campus',{
     id: {type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true},
-    campusname: {type: Sequelize.STRING},
-    imageurl: Sequelize.STRING,
-    address: Sequelize.STRING,
-    description: Sequelize.STRING
+    campusname: {
+        type:Sequelize.STRING,
+        allowNull:false,
+    },
+    imageurl: {
+        type:Sequelize.STRING,
+        defaultValue:'https://lehman.edu/media/Lehman-College-Website/Site-Assets/Images/News/2019/Lehman_College_Music_Building.jpg'
+    },
+    address: {
+        type:Sequelize.STRING,
+        allowNull: false,
+    },
+    description: {
+        type:Sequelize.STRING
+    }
 });
 
 
-// try{
-//     sequelize.authenticate().then(console.log("The connection has been established."))
-// }catch(er){
-//     console.log("Some error", er);
-// }
-app.get('/Students', async function(request, response) {
-    // dStuent.findAll().then(students => res.json(students))
+let Student = sequelize.define('Student',{
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    campusId: {
+        type: Sequelize.INTEGER,
+        references: {
+            model: Campus,
+            key: 'id'
+        }
+    },
+    firstname: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    lastname : {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    email : {
+        type: Sequelize.STRING,
+        allowNull:false,
+    },
+    school: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    imageUrl: {
+        type: Sequelize.STRING,
+        defaultValue: ''
+    },
+    gpa: {
+        type: Sequelize.FLOAT,
+    }
+});
 
- 
+Campus.hasMany(Student, { foreignKey: 'campusId' });
+Student.belongsTo(Campus, { foreignKey: 'campusId' });
+
+app.get('/Students', async function(request, response) {
+  
     let test =  await Student.findAll();
 
     console.log(test);
-    //Student.findAll().then(function(rows) {
-
-     //   console.log(row);
-
-
-       // for(var i = 0; i < rows.length; i++) {
-       // var columnData = rows[i].dataValues;
-        //var name = columnData.firstname + " " + columnData.lastname;
-    //console.log(columnData );
-    //someData.append(columnData);
-        //}
-        //console.log(someData);  
-    //});
     
     response.json(test);
 })
 
 app.get('/Campus', async function(request, response) {
-    // dStuent.findAll().then(students => res.json(students))
 
- 
     let test2 =  await Campus.findAll();
 
     console.log(test2);
-    //Student.findAll().then(function(rows) {
-
-     //   console.log(row);
-
-
-       // for(var i = 0; i < rows.length; i++) {
-       // var columnData = rows[i].dataValues;
-        //var name = columnData.firstname + " " + columnData.lastname;
-    //console.log(columnData );
-    //someData.append(columnData);
-        //}
-        //console.log(someData);  
-    //});
     
     response.json(test2);
 })
@@ -102,19 +103,11 @@ app.post('/Students', function(request, response){
     let lastName = request.body.lastName;
     let email = request.body.email;
     let school= request.body.school;
+    let imageURL = request.body.imageURL;
     let gpa = request.body.gpa;
 
-
-    //console.log(request);
     console.log("We are getting information from the front end");
 
-    // let Student = sequelize.define('Student',{
-    //     firstname: Sequelize.STRING,
-    //     lastname: Sequelize.STRING,
-    //     email: Sequelize.STRING,
-    //     school: Sequelize.STRING,
-    //     gpa: Sequelize.FLOAT
-    // });
 
     Student.sync().then(function(){
         console.log("The student table is ready to be used");
@@ -134,19 +127,16 @@ app.post('/Students', function(request, response){
                 lastname: lastName,
                 email: email,
                 school: school,
+                imageurl: imageURL,
                 gpa: gpa
             });
 
         }else{
             console.log("student");
-            // Notify the student that this user already exists in the table
         }
 
     });
-
     response.send("The form has been received");
-    
-
 });
 
 app.post('/Campus', function(request, response){
@@ -158,17 +148,7 @@ app.post('/Campus', function(request, response){
     let address = request.body.address;
     let description= request.body.description;
 
-
-    //console.log(request);
     console.log("We are getting information from the front end");
-
-    // let Student = sequelize.define('Student',{
-    //     firstname: Sequelize.STRING,
-    //     lastname: Sequelize.STRING,
-    //     email: Sequelize.STRING,
-    //     school: Sequelize.STRING,
-    //     gpa: Sequelize.FLOAT
-    // });
 
     Campus.sync().then(function(){
         console.log("The campus table is ready to be used");
@@ -192,14 +172,12 @@ app.post('/Campus', function(request, response){
 
         }else{
             console.log("campus");
-            // Notify the student that this user already exists in the table
         }
 
     });
 
     response.send("The campus form has been received");
     
-
 });
 
 app.delete('/Campus', async function(request, response){
@@ -237,6 +215,7 @@ app.put('/Students', async function(request, response){
         lastname: request.body.lastName,
         email: request.body.email,
         school: request.body.school,
+        imageurl: request.body.imageurl,
         gpa: request.body.gpa
     },
         {where: {
@@ -249,8 +228,6 @@ app.put('/Students', async function(request, response){
     response.json(test3);
 
 });
-
-
 
 app.put('/Campus', async function(request, response){
 
@@ -270,11 +247,6 @@ app.put('/Campus', async function(request, response){
     response.json(test4);
 
 });
-
-
-
-// find students who go to a campus
-// find campus that current student goes to
 
 console.log("Test");
 
