@@ -3,11 +3,7 @@ import { Button, Grid,Card, TextField } from '@material-ui/core'
 import {Link} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import React, {useState, useEffect} from 'react';
-import AddCampus from './addCampus'
 import Modal from '@material-ui/core/Modal';
-import shadows from '@material-ui/core/styles/shadows';
-import { spacing } from '@material-ui/system';
-
 
 function getModalStyle() {
   const top = 50;
@@ -67,6 +63,7 @@ const DisplayCampus = (props) => {
   function onDelete()  {
     // alert("Deleting '" + props.data.campusname + "' id #: " + props.data.id);
 
+    props.close();
     fetch('/Campus', {
     method: 'DELETE',
     headers: {
@@ -78,7 +75,6 @@ const DisplayCampus = (props) => {
     })
 })
 
-props.close();
   }
 
   const handleOpen = () => {
@@ -117,7 +113,7 @@ props.close();
              
                     <img src={url} />
 
-                    <h1>{campusInfo.campusname}</h1>
+                    <h2>{campusInfo.campusname}</h2>
               
 
 

@@ -37,7 +37,7 @@ function MainPage(){
         console.log(response.data[0]);
         let studentArr = [];
         let panels;
-    if(response.data[0] == ''){
+    if(response.data[0] === undefined){
       setStudents(  <Footer close={()=> toggled()} isStudent ={true}/> )
     }else{
       {response.data.length < 3 ? panels = response.data.length : panels  =3}
@@ -58,15 +58,17 @@ const fetchCampuses = async() => {
     axios.get("http://localhost:3002/Campus").then(response => {
     let campusArr = [];
     let panels;
-    if(response.data[0] != ''){
-      setCampus( <Grid><Footer close={()=> toggled()} isStudent ={false}/></Grid> )
+    if(response.data[0] === undefined){
+      setCampus( <Footer close={()=> toggled()} isStudent ={false}/> )
     }else{
-      {response.data.length<3 ? panels = response.data.length : panels  =3}
+      {response.data.length < 3 ? panels = response.data.length : panels  =3}
       for(let i = 0; i < panels ; i++){
         
         campusArr[i] = <DisplayCampus key={response.data.id} close={()=> toggled()} 
                                         data ={response.data[i]}/>;
+        if(i == panels -1 && panels<3){ campusArr[i+1] = <Footer close={()=> toggled()} isStudent ={false}/>}
       }
+
       setCampus(campusArr);
     }
       
@@ -101,7 +103,7 @@ const fetchCampuses = async() => {
               <Grid item xs={12} sm container>
                 <Grid container item>
                   <Grid container spacing={1}>
-                    <Grid container item xs={12} spacing={3}>
+                    <Grid container item xs={12} spacing={1}>
                       {campus}
                     </Grid>
                   </Grid>
@@ -111,7 +113,7 @@ const fetchCampuses = async() => {
 
             <Grid container spacing={2}>
               <Grid item xs={4} style= {{height: ""}} >
-                <Card className='see-all'>
+                <Card className='see-all' style={{height: "100%"}}>
 
                 <Link  to='/Students' style ={{textDecoration: 'none'}}>
                   <ButtonBase>
@@ -124,7 +126,7 @@ const fetchCampuses = async() => {
              <Grid item xs={12} sm container>
               <Grid container item>
                 <Grid container spacing={1}>
-                  <Grid container item xs={12} spacing={3}>
+                  <Grid container item xs={12} spacing={0}>
                     {students}
                   </Grid>
                 </Grid>

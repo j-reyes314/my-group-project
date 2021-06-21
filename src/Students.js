@@ -52,18 +52,18 @@ class Students extends React.Component{
     }
 
     createGrid(arr){
-        for (let i =0; i <this.state.studentArray.length/4; i++){
-            arr[i] = this.state.studentArray.slice(i*4,(i*4)+4);
+        for (let i =0; i <this.state.studentArray.length/3; i++){
+            arr[i] = this.state.studentArray.slice(i*3,(i*3)+3);
             arr[i] = arr[i].map(element => <DisplayStudents key={element.id}  close={()=> this.toggled()} data ={element}/>)
             
-            if(i+1 == this.state.studentArray.length/4 && this.state.studentArray.length%4 > 0 ){
-                arr[i+1] = this.state.studentArray.slice((i+1)*4,this.studentArray.length);
+            if(i+1 == this.state.studentArray.length/3 && this.state.studentArray.length%3 > 0 ){
+                arr[i+1] = this.state.studentArray.slice((i+1)*3,this.studentArray.length);
                 arr[i+1] =arr[i].map(element => <DisplayStudents key={element.id}  close={()=> this.toggled()} data ={element}/>);
             }
            
         }
         for(let j =0; j < arr.length;j++){
-            arr[j] = <FormRow arr ={arr[j]}/>
+            arr[j] = <FormRow key={j} arr ={arr[j]}/>
             
 
         }
@@ -87,10 +87,10 @@ class Students extends React.Component{
       
             
             <Grid container spacing={0} >
-                <Grid item xs={0} sm container>
-                    <Grid container item>
-                        <Grid container spacing={0} style ={{flexGrow: '1'}}>
-                            <Grid container item xs={12} spacing={6}  style={{padding: '2em'}}>
+                <Grid item justify='space-evenly' sm container>
+                    <Grid container justify='space-evenly' item>
+                        <Grid container justify='space-evenly' spacing={0} style ={{flexGrow: '1'}}>
+                            <Grid container justify='space-evenly' item xs={12} spacing={6}  style={{padding: '2em'}}>
                                 {arr}
                             </Grid>
                            

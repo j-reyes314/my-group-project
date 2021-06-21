@@ -21,11 +21,11 @@ function Navigation(){
         <Toolbar >
 
           <IconButton >
-            <Link to='/'><HomeIcon/></Link>
+            <Link to='/'><HomeIcon fontSize= 'large' color ='action'/></Link>
           </IconButton>
 
-          <Link to='/Campuses' style ={{textDecoration: 'none'}}><Button>Campuses</Button></Link>
-          <Link to='/Students' style ={{textDecoration: 'none'}}><Button>Students</Button></Link>
+          <Link to='/Campuses' style ={{textDecoration: 'none'}}><Button variant='outlined'>Campuses</Button></Link>
+          <Link to='/Students' style ={{textDecoration: 'none'}}><Button variant='outlined'>Students</Button></Link>
 
           
         </Toolbar>
@@ -38,9 +38,10 @@ function Navigation(){
       <Toolbar/>
 
         <Route exact path="/" component={MainPage} />
-        <Route path="/Campuses" component={Campus} />
-        <Route path="/Students" component={Students} />
-        <Route path='/Students/:id' component={DynamicDisplay} />
+        <Route exact path="/Campuses" component={Campus} />
+        <Route exact path="/Students" component={Students} />
+        <Route exact path='/Students/:id' component={DynamicDisplay} />
+        <Route exact path='/Campus/:id' component={DynamicDisplay} />
       <div className='padding'></div>
 </Router>
 

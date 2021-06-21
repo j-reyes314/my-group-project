@@ -4,8 +4,6 @@ import {Link} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import React, {useState, useEffect} from 'react';
 import { Modal } from '@material-ui/core';
-import shadows from '@material-ui/core/styles/shadows';
-import { spacing } from '@material-ui/system';
 
 
 function getModalStyle() {
@@ -68,6 +66,7 @@ const DisplayStudents = (props) => {
   function onDelete()  {
     // alert("Deleting '" + props.data.firstname + " "+ props.data.lastname + "' id #: " + props.data.id);
 
+    props.close();
     fetch('/Students', {
     method: 'DELETE',
     headers: {
@@ -79,7 +78,7 @@ const DisplayStudents = (props) => {
     })
     })
 
-props.close();
+
   }
 
   const handleOpen = () => {
@@ -113,13 +112,13 @@ props.close()
     return(
         
             <div className= {styles.root}>
-              <Grid container spacing ={0} zeroMinWidth>
+              <Grid container spacing ={0}>
               <Card cardName ={styles.paper}>
       
                   <img src={url} />
 
-                    <h1>{studentInfo.firstname} {studentInfo.lastname}</h1>
-                    <h2>{studentInfo.school}</h2>
+                    <h2>{studentInfo.firstname} {studentInfo.lastname}</h2>
+                    <h3>{studentInfo.school}</h3>
                 
 
 

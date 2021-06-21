@@ -32,8 +32,9 @@ class AddStudent extends React.Component{
         console.log("Testing the state");
         console.log(this.state);
         
-    
+        
         let values = this.state;
+        
         // alert("We submitted a form with this data " + values.firstName);
 
         (async () => {
@@ -49,6 +50,7 @@ class AddStudent extends React.Component{
             console.log("This is the content");
             console.log(content);
             this.props.close();
+            
           })();
           
           

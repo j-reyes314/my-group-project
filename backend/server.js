@@ -77,20 +77,18 @@ app.get('/Campus', async function(request, response) {
     let test2 =  await Campus.findAll();
 
     console.log(test2);
-    //Student.findAll().then(function(rows) {
 
-     //   console.log(row);
+    response.json(test2);
+})
 
+app.get('/Campus/:id', async function(request, response) {
+ 
+    let id = request.params.id;
+    console.log(id);
+    let test2 =  await Campus.findOne({where:{ id }});
 
-       // for(var i = 0; i < rows.length; i++) {
-       // var columnData = rows[i].dataValues;
-        //var name = columnData.firstname + " " + columnData.lastname;
-    //console.log(columnData );
-    //someData.append(columnData);
-        //}
-        //console.log(someData);  
-    //});
-    
+    // console.log(test2);
+
     response.json(test2);
 })
 
