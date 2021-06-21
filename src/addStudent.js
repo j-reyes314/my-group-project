@@ -10,6 +10,7 @@ class AddStudent extends React.Component{
             firstName: "",
             lastName: "",
             email: "",
+            imageURL: "",
             school: "",
             gpa: 0,
         }
@@ -88,6 +89,16 @@ class AddStudent extends React.Component{
                     name= 'email'
                     label='email'
                     placeholder='Email' />
+                <TextField
+                    required
+                    variant='filled'
+                    color='secondary'
+                    type='text'
+                    value = {this.state.imageURL} 
+                    onChange={this.handleFormChanges}
+                    name= 'imageURL'
+                    label='imageURL'
+                    placeholder='Image URL' />
                 <TextField
                     required
                     variant='filled'

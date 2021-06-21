@@ -36,7 +36,10 @@ const defaultnames =({
   id: '',
   firstname:'',
   lastname:'',
+  email: '',
+  imageURL: '',
   school:'',
+  gpa: '',
 })
 
 const DisplayStudents = (props) => {
@@ -52,6 +55,7 @@ const DisplayStudents = (props) => {
     firstname: props.data.firstname,
     lastName: props.data.lastname,
     email: props.data.email,
+    imageURL: props.data.imageURL,
     school: props.data.school,
     gpa: props.data.gpa,
     })
@@ -162,6 +166,15 @@ props.close()
                             name= 'email'
                             label='email'
                             placeholder='Email' />
+                        <TextField
+                            variant='filled'
+                            color='secondary'
+                            type='text'
+                            value = {students.imageURL} 
+                            onChange={e => setStudents({...students, imageURL: e.target.value})}
+                            name= 'imageURL'
+                            label='imageURl'
+                            placeholder='imageURL' />
                         <TextField
                             variant='filled'
                             color='secondary'
