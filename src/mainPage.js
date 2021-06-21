@@ -1,15 +1,13 @@
-
 import  ButtonBase  from '@material-ui/core/ButtonBase'
-import { Card } from '@material-ui/core'
-import { Typography } from '@material-ui/core'
+import { Card, Typography } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import axios from 'axios'
-// import { makeStyles } from '@material-ui/core'
-// import DisplayInfo from './displayInfo'
+
 import Lehman_College from './Lehman_College.jpg'
 import student_photo from './student_photo.jpg'
 import DisplayStudents from './displayStudents'
-import FormRow from './formRow'
+import DisplayCampus from './displayCampus'
+import Footer from './footer'
 
 import './mainPage.css'
 
@@ -17,77 +15,70 @@ import React, { useEffect, useState } from 'react';
 import {Link } from 'react-router-dom'
 
 
-// const useStyles = makeStyles((theme) => ({
-//   media: {
-//     height: 140,
-//     paddingTop: '56.25%', // 16:9
-//   },
-//   image: {
-//     width: 128,
-//     height: 128,
-//   },
-//   img: {
-//     margin: 'auto',
-//     display: 'block',
-//     maxWidth: '100%',
-//     maxHeight: '100%',
-//   },
-// }));
-
-
-
 function MainPage(){
   const [students,setStudents] = useState();
   const [campus, setCampus] = useState([]);
-
+  const [toggle, setToggle] =useState(false);
 
   useEffect(()=>{
-    fetchData();
-
+    fetchStudents()
+    fetchCampuses()
   },[]);
 
-  const fetchData = async() => {
-    // console.log("w.e");
-    const result = await
-axios.get("http://localhost:3002/Students").then(response => {
-    console.log(response.data[0]);
-    let studentArr = [];
-for(let i = 0; i < 3 ; i++){
-  studentArr[i] =response.data[i];
-  
-}
-setStudents(studentArr);
-console.log(studentArr);
-})
-.catch(error => {
-  console.log(error);
-});
+  const toggled=()=>{
+    fetchStudents();
+    fetchCampuses();
+    setToggle(!toggle);
+  }
 
-}
-
-const createGrid= (arr) =>{
-  for (let i =0; i <students.length/3; i++){
-      arr[i] = students.slice(i*3,(i*3)+3);
-      arr[i] = arr[i].map(element => <DisplayStudents key={element.id} data ={element}/>)
-      
-      if(i+1 == students.length/3 && this.state.studentArray.length%3 > 0 ){
-          arr[i+1] = students.slice((i+1)*3,this.studentArray.length);
-          arr[i+1] =arr[i].map(element => <DisplayStudents key={element.id} data ={element}/>);
+  const fetchStudents = async() => {
+        const result = await
+    axios.get("http://localhost:3002/Students").then(response => {
+        console.log(response.data[0]);
+        let studentArr = [];
+        let panels;
+    if(response.data[0] == ''){
+      setStudents(  <Footer close={()=> toggled()} isStudent ={true}/> )
+    }else{
+      {response.data.length < 3 ? panels = response.data.length : panels  =3}
+      for(let i = 0; i < panels ; i++){
+      studentArr[i] = <DisplayStudents key={response.data.id} close={()=>toggled()} 
+                                    data ={response.data[i]}/>;  
       }
-     
+    setStudents(studentArr);
+    }
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
-  for(let j =0; j < arr.length;j++){
-      arr[j] = <FormRow arr ={arr[j]}/>
-      
 
+const fetchCampuses = async() => {
+      const result = await
+    axios.get("http://localhost:3002/Campus").then(response => {
+    let campusArr = [];
+    let panels;
+    if(response.data[0] != ''){
+      setCampus( <Grid><Footer close={()=> toggled()} isStudent ={false}/></Grid> )
+    }else{
+      {response.data.length<3 ? panels = response.data.length : panels  =3}
+      for(let i = 0; i < panels ; i++){
+        
+        campusArr[i] = <DisplayCampus key={response.data.id} close={()=> toggled()} 
+                                        data ={response.data[i]}/>;
+      }
+      setCampus(campusArr);
+    }
+      
+    })
+    .catch(error => {
+    console.log(error);
+    });
   }
 
-  return arr;
-};
 
-      
 
- // const classes = useStyles();
+
     return(
         
           <div className='interface'>
@@ -111,7 +102,7 @@ const createGrid= (arr) =>{
                 <Grid container item>
                   <Grid container spacing={1}>
                     <Grid container item xs={12} spacing={3}>
-                      {/* <FormRow arr ={students}/> */}
+                      {campus}
                     </Grid>
                   </Grid>
                 </Grid>
@@ -134,10 +125,7 @@ const createGrid= (arr) =>{
               <Grid container item>
                 <Grid container spacing={1}>
                   <Grid container item xs={12} spacing={3}>
-                    {/* <FormRow name ='Student' /> */}
-                  </Grid>
-                  <Grid container item xs={12} spacing={3}>
-                    {/* <FormRow name ='Student' /> */}
+                    {students}
                   </Grid>
                 </Grid>
               </Grid>

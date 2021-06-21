@@ -21,7 +21,7 @@ class Campus extends React.Component{
     fetchData = async() => {
         // console.log("w.e");
         const result = await
-    axios.get("http://localhost:3002/Students").then(response => {
+    axios.get("http://localhost:3002/Campus").then(response => {
     let campusArrayNames = [];
     for(let i = 0; i < response.data.length ; i++){
         campusArrayNames[i] = response.data[i];
@@ -52,12 +52,12 @@ class Campus extends React.Component{
     }
 
     createGrid(arr){
-        for (let i =0; i <this.state.campusArray.length/3; i++){
-            arr[i] = this.state.campusArray.slice(i*3,(i*3)+3);
+        for (let i =0; i <this.state.campusArray.length/4; i++){
+            arr[i] = this.state.campusArray.slice(i*4,(i*4)+4);
             arr[i] = arr[i].map(element => <DisplayCampus key={element.id} close={()=> this.toggled()} data ={element}/>)
             
-            if(i+1 == this.state.campusArray.length/3 && this.state.campusArray.length%3 > 0 ){
-                arr[i+1] = this.state.campusArray.slice((i+1)*3,this.campusArray.length);
+            if(i+1 == this.state.campusArray.length/4 && this.state.campusArray.length%4 > 0 ){
+                arr[i+1] = this.state.campusArray.slice((i+1)*4,this.campusArray.length);
                 arr[i+1] =arr[i].map(element => <DisplayCampus key={element.id} close={()=> this.toggled()} data ={element}/>);
             }
            
@@ -85,11 +85,11 @@ class Campus extends React.Component{
                     <Footer close={()=> this.toggled()} isStudent ={false}/>
                 </div>
             
-                <Grid container spacing={0} >
-                <Grid item xs={0} sm container>
-                    <Grid container item>
-                        <Grid container spacing={0} style ={{flexGrow: '1'}}>
-                            <Grid container item xs={8} spacing={4}  style={{padding: '2em'}}>
+            <Grid container spacing={0} >
+                <Grid item justify='space-evenly' xs={0} sm container>
+                    <Grid container justify='space-evenly' item>
+                        <Grid container justify='space-evenly' spacing={0} style ={{flexGrow: '1'}}>
+                            <Grid container justify='space-evenly' item xs={12} spacing={4}  style={{padding: '2em'}}>
                                 {arr}
                             </Grid>
                            

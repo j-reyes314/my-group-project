@@ -33,7 +33,7 @@ class AddStudent extends React.Component{
         
     
         let values = this.state;
-        alert("We submitted a form with this data " + values.firstName);
+        // alert("We submitted a form with this data " + values.firstName);
 
         (async () => {
             const rawResponse = await fetch('/Students', {
@@ -49,7 +49,7 @@ class AddStudent extends React.Component{
             console.log(content);
             this.props.close();
           })();
-
+          
           
     }
     

@@ -71,6 +71,7 @@ class AddCampus extends React.Component{
                     color='secondary'
                     type='text'
                     value= {this.state.imageURL}
+                    defaultValue =''
                     onChange= {this.handleFormChanges}
                     name ='imageURL'
                     label='imageURL'
